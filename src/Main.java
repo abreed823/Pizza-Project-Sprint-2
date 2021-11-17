@@ -17,6 +17,7 @@ public class Main {
     private CustomerWelcomePage customerWelcome = new CustomerWelcomePage();
     private StartOrderPage startOrder = new StartOrderPage();
     private PizzaPage pizza = new PizzaPage();
+    private SidesPage sides = new SidesPage();
 
     private JPanel welcomePagePanel = welcomePage.getPanel();
     private JPanel loginPagePanel = login.getPanel();
@@ -24,6 +25,7 @@ public class Main {
     private JPanel customerWelcomePanel = customerWelcome.getPanel();
     private JPanel startOrderPanel = startOrder.getPanel();
     private JPanel pizzaPanel = pizza.getPanel();
+    private JPanel sidesPanel = sides.getPanel();
 
     public Main(){
         contentPanel.setLayout(cl);
@@ -33,6 +35,7 @@ public class Main {
         contentPanel.add(customerWelcomePanel,"customerWelcome");
         contentPanel.add(startOrderPanel, "startOrder");
         contentPanel.add(pizzaPanel, "pizza");
+        contentPanel.add(sidesPanel, "sides");
         cl.show(contentPanel, "welcome");
 
 //        , BorderLayout.CENTER

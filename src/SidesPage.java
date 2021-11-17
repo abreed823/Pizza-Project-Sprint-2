@@ -2,16 +2,38 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StartOrderPage {
-    private JPanel panelStartOrder;
+public class SidesPage {
     private JButton logOutButton;
-    private JButton pizzaButton;
-    private JButton sidesButton;
-    private JButton drinksButton;
-    private JButton viewCartButton;
+    private JPanel panelSides;
+    private JCheckBox breadSticks$400CheckBox;
+    private JCheckBox breadBites$200CheckBox;
+    private JCheckBox chocolateChipCookie$4CheckBox;
     private JButton backButton;
+    private JButton addToCartButton;
 
-    public StartOrderPage() {
+    public SidesPage() {
+        backButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.showCardLayout("startOrder");
+            }
+        });
+        addToCartButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.showCardLayout("startOrder");
+            }
+        });
         logOutButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -23,42 +45,9 @@ public class StartOrderPage {
                 Main.showCardLayout("welcome");
             }
         });
-        backButton.addActionListener(new ActionListener() {
-            /**
-             * Invoked when an action occurs.
-             *
-             * @param e the event to be processed
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.showCardLayout("customerWelcome");
-            }
-        });
-        pizzaButton.addActionListener(new ActionListener() {
-            /**
-             * Invoked when an action occurs.
-             *
-             * @param e the event to be processed
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.showCardLayout("pizza");
-            }
-        });
-        sidesButton.addActionListener(new ActionListener() {
-            /**
-             * Invoked when an action occurs.
-             *
-             * @param e the event to be processed
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.showCardLayout("sides");
-            }
-        });
     }
 
     public JPanel getPanel(){
-        return panelStartOrder;
+        return panelSides;
     }
 }
