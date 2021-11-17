@@ -16,12 +16,14 @@ public class Main {
     private CreateAccountPage createAccount = new CreateAccountPage();
     private CustomerWelcomePage customerWelcome = new CustomerWelcomePage();
     private StartOrderPage startOrder = new StartOrderPage();
+    private PizzaPage pizza = new PizzaPage();
 
     private JPanel welcomePagePanel = welcomePage.getPanel();
     private JPanel loginPagePanel = login.getPanel();
     private JPanel createAccountPanel = createAccount.getPanel();
     private JPanel customerWelcomePanel = customerWelcome.getPanel();
     private JPanel startOrderPanel = startOrder.getPanel();
+    private JPanel pizzaPanel = pizza.getPanel();
 
     public Main(){
         contentPanel.setLayout(cl);
@@ -30,6 +32,7 @@ public class Main {
         contentPanel.add(createAccountPanel, "createAccount");
         contentPanel.add(customerWelcomePanel,"customerWelcome");
         contentPanel.add(startOrderPanel, "startOrder");
+        contentPanel.add(pizzaPanel, "pizza");
         cl.show(contentPanel, "welcome");
 
 //        , BorderLayout.CENTER
