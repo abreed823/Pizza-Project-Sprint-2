@@ -22,6 +22,7 @@ public class Main {
     private CheckOutPage checkOut = new CheckOutPage();
     private ViewCartPage viewCart = new ViewCartPage();
     private PayCardPage payCard = new PayCardPage();
+    private PayCashPage payCash = new PayCashPage();
 
     private JPanel welcomePagePanel = welcomePage.getPanel();
     private JPanel loginPagePanel = login.getPanel();
@@ -34,6 +35,7 @@ public class Main {
     private JPanel checkOutPanel = checkOut.getPanel();
     private JPanel viewCartPanel = viewCart.getPanel();
     private JPanel payCardPanel = payCard.getPanel();
+    private JPanel payCashPanel = payCash.getPanel();
 
     public Main(){
         contentPanel.setLayout(cl);
@@ -48,6 +50,8 @@ public class Main {
         contentPanel.add(checkOutPanel,"checkOut");
         contentPanel.add(viewCartPanel,"viewCart");
         contentPanel.add(payCardPanel,"payCard");
+        contentPanel.add(payCashPanel,"payCash");
+
         cl.show(contentPanel, "welcome");
 
 //        , BorderLayout.CENTER
