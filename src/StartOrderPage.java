@@ -56,6 +56,17 @@ public class StartOrderPage {
                 Main.showCardLayout("sides");
             }
         });
+        drinksButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.showCardLayout("drinks");
+            }
+        });
     }
 
     public JPanel getPanel(){
