@@ -1,18 +1,30 @@
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.HashMap;
 
 public class LoginPage {
     private JPanel panelLogIn;
-    private JFormattedTextField formattedTextField1;
+    private JFormattedTextField phoneNumberField;
     private JButton backButton;
     private JButton logInButton;
-    private JPasswordField passwordField1;
+    private JPasswordField passwordField;
+    private JLabel errorMessageLabel;
     private HashMap<String, String> loginInfo = new HashMap<String,String>();
 
     public LoginPage(HashMap<String, String> loginInfoOriginal) {
         loginInfo = loginInfoOriginal;
+        MaskFormatter phoneNumFormat;
+        try {
+            phoneNumFormat = new MaskFormatter("###-###-####");
+            phoneNumFormat.setValidCharacters("0123456789");
+            phoneNumFormat.setPlaceholderCharacter('#');
+            phoneNumFormat.install(phoneNumberField);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         backButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -21,8 +33,9 @@ public class LoginPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                formattedTextField1.setText("");
-                passwordField1.setText("");
+                phoneNumberField.setText("");
+                passwordField.setText("");
+                errorMessageLabel.setText("");
                 Main.showCardLayout("welcome");
             }
         });
@@ -34,18 +47,28 @@ public class LoginPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                String userID = formattedTextField1.getText();
-                String password = String.valueOf(passwordField1.getPassword());
+                String userID = phoneNumberField.getText();
+                String password = String.valueOf(passwordField.getPassword());
 
                 if(loginInfo.containsKey(userID)){
                     if(loginInfo.get(userID).equals(password)){
-                        formattedTextField1.setText("");
-                        passwordField1.setText("");
+                        phoneNumberField.setText("");
+                        passwordField.setText("");
                         Main.showCardLayout("customerWelcome");
+                    }else{
+                        passwordIncorrect();
                     }
+                }else if(phoneNumberField.getText().equals("") || String.valueOf(passwordField.getPassword()).equals("")){
+                    errorMessageLabel.setText("Please enter both your username and your password.");
+                }else{
+                    passwordIncorrect();
                 }
             }
         });
+    }
+
+    public void passwordIncorrect(){
+        errorMessageLabel.setText("Your username and/or password is incorrect.");
     }
 
     public JPanel getPanel(){

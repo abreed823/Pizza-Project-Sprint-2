@@ -2,10 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Main {
-    private JFrame frame = new JFrame("Card Layout Test");
+    private JFrame frame = new JFrame("Mom and Pop's Pizza Shop");
     private static JPanel contentPanel = new JPanel();
     private static CardLayout cl = new CardLayout(20, 20);
-    private IDsandPasswords idsandPasswords = new IDsandPasswords();
+    private static IDsandPasswords idsandPasswords = new IDsandPasswords();
 //    private WelcomePage welcomePage = new WelcomePage();
 //    private LoginPageExample loginPage = new LoginPageExample();
 
@@ -73,6 +73,10 @@ public class Main {
     //Allows the card layout to be controlled by other objects/pages
     public static void showCardLayout(String cardName){
         cl.show(contentPanel, cardName);
+    }
+
+    public static void addLogin(String phoneNumber, String password){
+        idsandPasswords.addLogin(phoneNumber,password);
     }
 
 
