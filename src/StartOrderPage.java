@@ -75,7 +75,7 @@ public class StartOrderPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.showCardLayout("checkOut");
+                Main.showCardLayout("viewCart");
             }
         });
     }
