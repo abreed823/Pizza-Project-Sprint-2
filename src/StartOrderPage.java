@@ -67,6 +67,17 @@ public class StartOrderPage {
                 Main.showCardLayout("drinks");
             }
         });
+        viewCartButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.showCardLayout("checkOut");
+            }
+        });
     }
 
     public JPanel getPanel(){
