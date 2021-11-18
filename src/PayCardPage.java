@@ -2,16 +2,17 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CheckOutPage {
-    private JPanel panelCheckOut;
+public class PayCardPage {
     private JButton logOutButton;
-    private JRadioButton cardRadioButton;
-    private JRadioButton cashRadioButton;
-    private JRadioButton checkRadioButton;
+    private JPanel panelPayCard;
+    private JFormattedTextField formattedTextField1;
+    private JFormattedTextField formattedTextField2;
+    private JFormattedTextField formattedTextField3;
+    private JFormattedTextField formattedTextField4;
     private JButton backButton;
-    private JButton continueButton;
+    private JButton finishPayButton;
 
-    public CheckOutPage() {
+    public PayCardPage() {
         logOutButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -31,23 +32,12 @@ public class CheckOutPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.showCardLayout("startOrder");
-            }
-        });
-        continueButton.addActionListener(new ActionListener() {
-            /**
-             * Invoked when an action occurs.
-             *
-             * @param e the event to be processed
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.showCardLayout("payCard");
+                Main.showCardLayout("checkOut");
             }
         });
     }
 
     public JPanel getPanel(){
-        return panelCheckOut;
+        return panelPayCard;
     }
 }

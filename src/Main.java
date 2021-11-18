@@ -20,6 +20,7 @@ public class Main {
     private SidesPage sides = new SidesPage();
     private DrinksPage drinks = new DrinksPage();
     private CheckOutPage checkOut = new CheckOutPage();
+    private PayCardPage payCard = new PayCardPage();
 
     private JPanel welcomePagePanel = welcomePage.getPanel();
     private JPanel loginPagePanel = login.getPanel();
@@ -30,6 +31,7 @@ public class Main {
     private JPanel sidesPanel = sides.getPanel();
     private JPanel drinksPanel = drinks.getPanel();
     private JPanel checkOutPanel = checkOut.getPanel();
+    private JPanel payCardPanel = payCard.getPanel();
 
     public Main(){
         contentPanel.setLayout(cl);
@@ -42,6 +44,7 @@ public class Main {
         contentPanel.add(sidesPanel, "sides");
         contentPanel.add(drinksPanel,"drinks");
         contentPanel.add(checkOutPanel,"checkOut");
+        contentPanel.add(payCardPanel,"payCard");
         cl.show(contentPanel, "welcome");
 
 //        , BorderLayout.CENTER
