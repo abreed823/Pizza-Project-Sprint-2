@@ -2,14 +2,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PayCashPage {
+public class ReceiptPage {
     private JButton logOutButton;
-    private JPanel panelPayCash;
-    private JButton backButton;
-    private JButton continueButton;
+    private JPanel panelReceipt;
+    private JButton printButton;
+    private JButton exitButton;
 
-    public PayCashPage() {
-        logOutButton.addActionListener(new ActionListener() {
+    public ReceiptPage() {
+        exitButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
              *
@@ -20,7 +20,7 @@ public class PayCashPage {
                 Main.showCardLayout("welcome");
             }
         });
-        backButton.addActionListener(new ActionListener() {
+        printButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
              *
@@ -28,23 +28,12 @@ public class PayCashPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.showCardLayout("checkOut");
-            }
-        });
-        continueButton.addActionListener(new ActionListener() {
-            /**
-             * Invoked when an action occurs.
-             *
-             * @param e the event to be processed
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.showCardLayout("receipt");
+                Main.showCardLayout("print");
             }
         });
     }
 
     public JPanel getPanel(){
-        return panelPayCash;
+        return panelReceipt;
     }
 }

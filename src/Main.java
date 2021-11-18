@@ -23,6 +23,8 @@ public class Main {
     private ViewCartPage viewCart = new ViewCartPage();
     private PayCardPage payCard = new PayCardPage();
     private PayCashPage payCash = new PayCashPage();
+    private ReceiptPage receipt = new ReceiptPage();
+    private PrintPage print = new PrintPage();
 
     private JPanel welcomePagePanel = welcomePage.getPanel();
     private JPanel loginPagePanel = login.getPanel();
@@ -36,6 +38,8 @@ public class Main {
     private JPanel viewCartPanel = viewCart.getPanel();
     private JPanel payCardPanel = payCard.getPanel();
     private JPanel payCashPanel = payCash.getPanel();
+    private JPanel receiptPanel = receipt.getPanel();
+    private JPanel printPanel = print.getPanel();
 
     public Main(){
         contentPanel.setLayout(cl);
@@ -51,6 +55,8 @@ public class Main {
         contentPanel.add(viewCartPanel,"viewCart");
         contentPanel.add(payCardPanel,"payCard");
         contentPanel.add(payCashPanel,"payCash");
+        contentPanel.add(receiptPanel,"receipt");
+        contentPanel.add(printPanel,"print");
 
         cl.show(contentPanel, "welcome");
 
