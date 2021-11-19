@@ -17,8 +17,8 @@ public class IDsandPasswords {
     public void addLogin(String phoneNumber, String password){
         loginInfo.put(phoneNumber,password);
     }
-    
-    public void boolean accountExists(String phoneNumber){
+
+    public boolean accountExists(String phoneNumber){
         return loginInfo.containsKey(phoneNumber);
     }
 }

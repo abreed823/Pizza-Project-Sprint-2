@@ -79,6 +79,9 @@ public class Main {
         idsandPasswords.addLogin(phoneNumber,password);
     }
 
+    public static boolean accountExists(String phoneNumber){
+        return idsandPasswords.accountExists(phoneNumber);
+    }
 
     public static void main(String[] args){
         SwingUtilities.invokeLater(new Runnable() {

@@ -97,7 +97,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="1b915" class="javax.swing.JRadioButton" binding="small$400RadioButton" default-binding="true">
+                  <component id="1b915" class="javax.swing.JRadioButton" binding="smallRadioButton">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -106,7 +106,7 @@
                       <text value="Small ($4.00)"/>
                     </properties>
                   </component>
-                  <component id="d774c" class="javax.swing.JRadioButton" binding="medium$600RadioButton" default-binding="true">
+                  <component id="d774c" class="javax.swing.JRadioButton" binding="mediumRadioButton">
                     <constraints>
                       <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -115,7 +115,7 @@
                       <text value="Medium ($6.00)"/>
                     </properties>
                   </component>
-                  <component id="6c45" class="javax.swing.JRadioButton" binding="large$800RadioButton" default-binding="true">
+                  <component id="6c45" class="javax.swing.JRadioButton" binding="largeRadioButton">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -124,7 +124,7 @@
                       <text value="Large ($8.00)"/>
                     </properties>
                   </component>
-                  <component id="1c0e" class="javax.swing.JRadioButton" binding="xLarge$1000RadioButton" default-binding="true">
+                  <component id="1c0e" class="javax.swing.JRadioButton" binding="xLargeRadioButton">
                     <constraints>
                       <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -443,4 +443,19 @@
       </grid>
     </children>
   </grid>
+  <buttonGroups>
+    <group name="sizeButtonGroup">
+      <member id="1b915"/>
+      <member id="1b915"/>
+      <member id="d774c"/>
+      <member id="6c45"/>
+      <member id="1c0e"/>
+    </group>
+    <group name="crustButtonGroup">
+      <member id="8e6c0"/>
+      <member id="8e6c0"/>
+      <member id="3d9ca"/>
+      <member id="14ec9"/>
+    </group>
+  </buttonGroups>
 </form>

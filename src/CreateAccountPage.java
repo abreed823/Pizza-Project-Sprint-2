@@ -26,7 +26,6 @@ public class CreateAccountPage {
         } catch (ParseException e) {
              e.printStackTrace();
         }
-
         backButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -34,7 +33,16 @@ public class CreateAccountPage {
              * @param e the event to be processed
              */
             @Override
+
             public void actionPerformed(ActionEvent e) {
+                firstNameTextField.setText("");
+                lastNameTextField.setText("");
+                phoneNumberTextField.setText("");
+                addressTextField.setText("");
+                passwordField.setText("");
+                confirmPasswordField.setText("");
+                errorMessageLabel.setText("");
+
                 Main.showCardLayout("welcome");
             }
         });
@@ -53,11 +61,11 @@ public class CreateAccountPage {
                     errorMessageLabel.setText("Please fill out all text fields.");
                 }else if(!String.valueOf(passwordField.getPassword()).equals(String.valueOf(confirmPasswordField.getPassword()))){
                     errorMessageLabel.setText("Your passwords do not match.");
-                }else if(true){
-                    firstNameTextField.setText("");
+                }else if(Main.accountExists(phoneNumberTextField.getText())){
+                    errorMessageLabel.setText("An account already exists for this phone number.");
 
                 }else {
-                    Main.addLogin(phoneNumberTextField.getText(), String.valueOf(passwordField.getPassword()));
+                    //Main.addLogin(phoneNumberTextField.getText(), String.valueOf(passwordField.getPassword()));
                     firstNameTextField.setText("");
                     lastNameTextField.setText("");
                     phoneNumberTextField.setText("");
@@ -65,6 +73,7 @@ public class CreateAccountPage {
                     passwordField.setText("");
                     confirmPasswordField.setText("");
                     errorMessageLabel.setText("");
+
                     Main.showCardLayout("customerWelcome");
                 }
             }
