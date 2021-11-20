@@ -38,7 +38,6 @@ public class PizzaPage {
     private double sizePrice;
     private double toppingsPrice;
     private double pricePerTopping;
-    //private double toppingsTotalPrice;
     private String itemTotalPrice;
 
     public PizzaPage() {

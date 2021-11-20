@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//resetPage();
+//                Main.showCardLayout("startOrder");
 public class DrinksPage {
     private JPanel panelDrinks;
     private JButton logOutButton;
@@ -18,9 +19,14 @@ public class DrinksPage {
     private JRadioButton smallRadioButton;
     private JRadioButton mediumRadioButton;
     private JRadioButton largeRadioButton;
+    private JLabel itemTotalLabel;
+    private JLabel cartSubtotalLabel;
 
     private ButtonGroup drinksButtonGroup;
     private ButtonGroup sizesButtonGroup;
+
+    private boolean sizeSelected;
+    private boolean drinkSelected;
 
     public DrinksPage() {
         drinksButtonGroup = new ButtonGroup();
@@ -46,7 +52,7 @@ public class DrinksPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                resetRadioButtons();
+                resetPage();
                 Main.showCardLayout("welcome");
             }
         });
@@ -58,7 +64,7 @@ public class DrinksPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                resetRadioButtons();
+                resetPage();
                 Main.showCardLayout("startOrder");
             }
         });
@@ -70,15 +76,61 @@ public class DrinksPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                resetRadioButtons();
+                resetPage();
                 Main.showCardLayout("startOrder");
             }
         });
+        ActionListener listener = new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sizeSelected = true;
+                updateItemTotalLabel();
+            }
+        };
+        smallRadioButton.addActionListener(listener);
+        mediumRadioButton.addActionListener(listener);
+        largeRadioButton.addActionListener(listener);
+        ActionListener listener1 = new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                drinkSelected = true;
+                updateItemTotalLabel();
+            }
+        };
+        pepsiRadioButton.addActionListener(listener1);
+        orangeRadioButton1.addActionListener(listener1);
+        rootBeerRadioButton.addActionListener(listener1);
+        dietRootBeerRadioButton.addActionListener(listener1);
+        dietOrangeRadioButton.addActionListener(listener1);
+        dietPepsiRadioButton.addActionListener(listener1);
+        sierraMistRadioButton.addActionListener(listener1);
+        lemonadeRadioButton.addActionListener(listener1);
     }
 
-    public void resetRadioButtons(){
+    public void updateItemTotalLabel(){
+        if(sizeSelected && drinkSelected){
+            itemTotalLabel.setText("Item Total: $1.00");
+        }
+    }
+
+    public void resetPage(){
         drinksButtonGroup.clearSelection();
         sizesButtonGroup.clearSelection();
+
+        itemTotalLabel.setText("Item Total: $0.00");
+
+        sizeSelected = false;
+        drinkSelected = false;
     }
 
     public JPanel getPanel(){
