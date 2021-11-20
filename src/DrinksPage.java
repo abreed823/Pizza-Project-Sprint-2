@@ -20,6 +20,7 @@ public class DrinksPage {
     private JRadioButton largeRadioButton;
     private JLabel itemTotalLabel;
     private JLabel cartSubtotalLabel;
+    private JLabel errorMessageLabel;
 
     private ButtonGroup drinksButtonGroup;
     private ButtonGroup sizesButtonGroup;
@@ -75,8 +76,12 @@ public class DrinksPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                resetPage();
-                Main.showCardLayout("startOrder");
+                if(!(sizeSelected && drinkSelected)){
+                    errorMessageLabel.setText("*Please make all required selections.");
+                }else {
+                    resetPage();
+                    Main.showCardLayout("startOrder");
+                }
             }
         });
         ActionListener listener = new ActionListener() {
@@ -130,6 +135,8 @@ public class DrinksPage {
 
         sizeSelected = false;
         drinkSelected = false;
+
+        errorMessageLabel.setText("*Required");
     }
 
     public JPanel getPanel(){

@@ -13,6 +13,7 @@ public class SidesPage {
     private JButton addToCartButton;
     private JLabel itemTotalLabel;
     private JLabel cartSubtotalLabel;
+    private JLabel errorMessageLabel;
 
     private ArrayList<JCheckBox> checkBoxes;
 
@@ -45,8 +46,12 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                resetPage();
-                Main.showCardLayout("startOrder");
+                if(!sidesAreSelected()){
+                    errorMessageLabel.setText("*Please make all required selections.");
+                }else {
+                    resetPage();
+                    Main.showCardLayout("startOrder");
+                }
             }
         });
         logOutButton.addActionListener(new ActionListener() {
@@ -106,6 +111,15 @@ public class SidesPage {
         itemTotalLabel.setText("Item Total: $" + totalPrice);
     }
 
+    public boolean sidesAreSelected(){
+        for(JCheckBox box: checkBoxes){
+            if(box.isSelected()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void resetPage(){
         for(JCheckBox checkBox: checkBoxes){
             checkBox.setSelected(false);
@@ -113,6 +127,8 @@ public class SidesPage {
 
         sidesPrice = 0;
         itemTotalLabel.setText("Item Total: $0.00");
+
+        errorMessageLabel.setText("*Required");
     }
 
     public JPanel getPanel(){

@@ -1,4 +1,5 @@
-//TODO - add "please make all selections" labels, update cart total, create image icon for logo,
+//TODO - add "please make all selections" labels, clean up code, update cart total, create image icon for logo,
+//TODO - change back buttons to cancel on menu, "item added successfully" label
 
 import javax.swing.*;
 import java.awt.*;

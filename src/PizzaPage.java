@@ -22,17 +22,18 @@ public class PizzaPage {
     private JRadioButton originalRadioButton;
     private JRadioButton panRadioButton;
     private JRadioButton thinRadioButton;
-    private JButton backButton;
+    private JButton cancelButton;
     private JButton addToCartButton;
     private JLabel itemTotalLabel;
     private JLabel cartSubtotalLabel;
+    private JLabel errorMessageLabel;
 
     private ButtonGroup sizesButtonGroup;
     private ButtonGroup crustButtonGroup;
 
     private double toppingsCounter;
 
-    private ArrayList<JCheckBox> boxesToDisable = new ArrayList<JCheckBox>();
+    private ArrayList<JCheckBox> boxesToDisable;
     private boolean disabled;
 
     private double sizePrice;
@@ -40,8 +41,15 @@ public class PizzaPage {
     private double pricePerTopping;
     private String itemTotalPrice;
 
+    private boolean sizeSelected;
+    private boolean crustSelected;
+
     public PizzaPage() {
 
+        sizeSelected = false;
+        crustSelected = false;
+
+        boxesToDisable = new ArrayList<JCheckBox>();
         addCheckBoxes();
         disabled = false;
         toppingsCounter = 0;
@@ -70,7 +78,7 @@ public class PizzaPage {
                 Main.showCardLayout("welcome");
             }
         });
-        backButton.addActionListener(new ActionListener() {
+        cancelButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
              *
@@ -90,8 +98,12 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                resetPage();
-                Main.showCardLayout("startOrder");
+                if(!(sizeSelected && crustSelected)){
+                    errorMessageLabel.setText("*Please make all required selections.");
+                }else {
+                    resetPage();
+                    Main.showCardLayout("startOrder");
+                }
             }
         });
 
@@ -242,6 +254,20 @@ public class PizzaPage {
                 updateSizePrice(10.00);
             }
         });
+        ActionListener listener = new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                crustSelected = true;
+            }
+        };
+        originalRadioButton.addActionListener(listener);
+        panRadioButton.addActionListener(listener);
+        thinRadioButton.addActionListener(listener);
     }
 
     public void addCheckBoxes(){
@@ -296,6 +322,7 @@ public class PizzaPage {
     }
 
     public void updateSizePrice(double sizePrice){
+        sizeSelected = true;
         this.sizePrice = sizePrice;
         updateToppingsPrice(pricePerTopping, toppingsCounter);
     }
@@ -326,8 +353,12 @@ public class PizzaPage {
         pricePerTopping = 0;
         sizePrice = 0;
 
-        //resets itemTotalLabel
+        //resets appropriate labels
         itemTotalLabel.setText("Item Total: $0.00");
+        errorMessageLabel.setText("*Required");
+
+        sizeSelected = false;
+        crustSelected = false;
     }
 
     public JPanel getPanel(){
