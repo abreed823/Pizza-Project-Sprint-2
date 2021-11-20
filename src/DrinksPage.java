@@ -13,7 +13,7 @@ public class DrinksPage {
     private JRadioButton dietPepsiRadioButton;
     private JRadioButton sierraMistRadioButton;
     private JRadioButton lemonadeRadioButton;
-    private JButton backButton;
+    private JButton cancelButton;
     private JButton addToCartButton;
     private JRadioButton smallRadioButton;
     private JRadioButton mediumRadioButton;
@@ -56,7 +56,7 @@ public class DrinksPage {
                 Main.showCardLayout("welcome");
             }
         });
-        backButton.addActionListener(new ActionListener() {
+        cancelButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
              *

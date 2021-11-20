@@ -9,7 +9,7 @@ public class SidesPage {
     private JCheckBox breadSticksCheckBox;
     private JCheckBox breadBitesCheckBox;
     private JCheckBox cookieCheckBox;
-    private JButton backButton;
+    private JButton cancelButton;
     private JButton addToCartButton;
     private JLabel itemTotalLabel;
     private JLabel cartSubtotalLabel;
@@ -26,7 +26,7 @@ public class SidesPage {
         checkBoxes.add(breadSticksCheckBox);
         checkBoxes.add(cookieCheckBox);
 
-        backButton.addActionListener(new ActionListener() {
+        cancelButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
              *
