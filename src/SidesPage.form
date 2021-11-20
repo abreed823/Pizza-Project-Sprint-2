@@ -165,15 +165,15 @@
               <text value="Add To Cart"/>
             </properties>
           </component>
-          <component id="59180" class="javax.swing.JLabel">
+          <component id="59180" class="javax.swing.JLabel" binding="itemTotalLabel">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Item Total: $400"/>
+              <text value="Item Total: $0.00"/>
             </properties>
           </component>
-          <component id="9093c" class="javax.swing.JLabel">
+          <component id="9093c" class="javax.swing.JLabel" binding="cartSubtotalLabel">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
