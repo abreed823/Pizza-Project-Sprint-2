@@ -25,23 +25,30 @@ public class PizzaPage {
     private JButton backButton;
     private JButton addToCartButton;
 
+    private ButtonGroup sizesButtonGroup;
+    private ButtonGroup crustButtonGroup;
+
     private int toppingsCounter;
 
     private ArrayList<JCheckBox> boxesToDisable = new ArrayList<JCheckBox>();
     private boolean disabled;
 
     public PizzaPage() {
-        boxesToDisable.add(pepperoniCheckBox);
-        boxesToDisable.add(onionCheckBox);
-        boxesToDisable.add(mushroomCheckBox);
-        boxesToDisable.add(hamCheckBox);
-        boxesToDisable.add(sausageCheckBox);
-        boxesToDisable.add(pineappleCheckBox);
-        boxesToDisable.add(greenPepperCheckBox);
-        boxesToDisable.add(tomatoCheckBox);
-        boxesToDisable.add(extraCheeseCheckBox);
+
+        addCheckBoxes();
         disabled = false;
         toppingsCounter = 0;
+
+        sizesButtonGroup = new ButtonGroup();
+        sizesButtonGroup.add(smallRadioButton);
+        sizesButtonGroup.add(mediumRadioButton);
+        sizesButtonGroup.add(largeRadioButton);
+        sizesButtonGroup.add(xLargeRadioButton);
+
+       crustButtonGroup = new ButtonGroup();
+       crustButtonGroup.add(originalRadioButton);
+       crustButtonGroup.add(thinRadioButton);
+       crustButtonGroup.add(panRadioButton);
 
         logOutButton.addActionListener(new ActionListener() {
             /**
@@ -51,6 +58,8 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                resetRadioButtons();
+                resetCheckBoxes();
                 Main.showCardLayout("welcome");
             }
         });
@@ -62,6 +71,8 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                resetRadioButtons();
+                resetCheckBoxes();
                 Main.showCardLayout("startOrder");
             }
         });
@@ -73,6 +84,8 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                resetRadioButtons();
+                resetCheckBoxes();
                 Main.showCardLayout("startOrder");
             }
         });
@@ -178,17 +191,30 @@ public class PizzaPage {
         });
     }
 
+    public void addCheckBoxes(){
+        boxesToDisable.clear();
+        boxesToDisable.add(pepperoniCheckBox);
+        boxesToDisable.add(onionCheckBox);
+        boxesToDisable.add(mushroomCheckBox);
+        boxesToDisable.add(hamCheckBox);
+        boxesToDisable.add(sausageCheckBox);
+        boxesToDisable.add(pineappleCheckBox);
+        boxesToDisable.add(greenPepperCheckBox);
+        boxesToDisable.add(tomatoCheckBox);
+        boxesToDisable.add(extraCheeseCheckBox);
+    }
+
     public void toggleCheckBox(JCheckBox box){
         if(box.isSelected()){
             boxesToDisable.remove(box);
-            changeCounter(true);
+            changeToppingsCounter(true);
         }else{
             boxesToDisable.add(box);
-            changeCounter(false);
+            changeToppingsCounter(false);
         }
     }
 
-    public void changeCounter(boolean add){
+    public void changeToppingsCounter(boolean add){
         if(add){
             toppingsCounter++;
         }else{
@@ -214,6 +240,20 @@ public class PizzaPage {
             box.setEnabled(true);
         }
         disabled = false;
+    }
+
+    public void resetCheckBoxes(){
+        addCheckBoxes();
+        enableCheckBoxes();
+        toppingsCounter = 0;
+        for(JCheckBox box: boxesToDisable){
+            box.setSelected(false);
+        }
+    }
+
+    public void resetRadioButtons(){
+        sizesButtonGroup.clearSelection();
+        crustButtonGroup.clearSelection();
     }
 
     public JPanel getPanel(){

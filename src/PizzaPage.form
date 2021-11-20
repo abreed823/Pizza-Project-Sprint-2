@@ -444,13 +444,6 @@
     </children>
   </grid>
   <buttonGroups>
-    <group name="sizeButtonGroup">
-      <member id="1b915"/>
-      <member id="1b915"/>
-      <member id="d774c"/>
-      <member id="6c45"/>
-      <member id="1c0e"/>
-    </group>
     <group name="crustButtonGroup">
       <member id="8e6c0"/>
       <member id="8e6c0"/>

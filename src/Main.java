@@ -1,3 +1,5 @@
+//TODO - update item-total labels as you go, create image icon for logo, key listener log in
+
 import javax.swing.*;
 import java.awt.*;
 

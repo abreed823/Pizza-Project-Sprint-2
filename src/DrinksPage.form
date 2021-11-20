@@ -78,7 +78,7 @@
             </constraints>
             <properties>
               <font size="24"/>
-              <text value="Drinks"/>
+              <text value="Drinks:"/>
             </properties>
           </component>
           <hspacer id="dc035">

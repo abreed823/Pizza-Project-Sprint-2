@@ -17,7 +17,8 @@ public class WelcomePage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.showCardLayout("login");
+                //todo-reset this button to link back to the log in page
+                Main.showCardLayout("startOrder");
             }
         });
         createAccountButton.addActionListener(new ActionListener() {

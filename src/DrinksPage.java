@@ -19,7 +19,25 @@ public class DrinksPage {
     private JRadioButton mediumRadioButton;
     private JRadioButton largeRadioButton;
 
+    private ButtonGroup drinksButtonGroup;
+    private ButtonGroup sizesButtonGroup;
+
     public DrinksPage() {
+        drinksButtonGroup = new ButtonGroup();
+        drinksButtonGroup.add(pepsiRadioButton);
+        drinksButtonGroup.add(dietPepsiRadioButton);
+        drinksButtonGroup.add(orangeRadioButton1);
+        drinksButtonGroup.add(dietOrangeRadioButton);
+        drinksButtonGroup.add(rootBeerRadioButton);
+        drinksButtonGroup.add(dietRootBeerRadioButton);
+        drinksButtonGroup.add(sierraMistRadioButton);
+        drinksButtonGroup.add(lemonadeRadioButton);
+
+        sizesButtonGroup = new ButtonGroup();
+        sizesButtonGroup.add(smallRadioButton);
+        sizesButtonGroup.add(mediumRadioButton);
+        sizesButtonGroup.add(largeRadioButton);
+
         logOutButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -28,6 +46,7 @@ public class DrinksPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                resetRadioButtons();
                 Main.showCardLayout("welcome");
             }
         });
@@ -39,6 +58,7 @@ public class DrinksPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                resetRadioButtons();
                 Main.showCardLayout("startOrder");
             }
         });
@@ -50,9 +70,15 @@ public class DrinksPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                resetRadioButtons();
                 Main.showCardLayout("startOrder");
             }
         });
+    }
+
+    public void resetRadioButtons(){
+        drinksButtonGroup.clearSelection();
+        sizesButtonGroup.clearSelection();
     }
 
     public JPanel getPanel(){
