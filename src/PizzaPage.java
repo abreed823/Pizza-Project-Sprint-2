@@ -24,6 +24,8 @@ public class PizzaPage {
     private JRadioButton thinRadioButton;
     private JButton backButton;
     private JButton addToCartButton;
+    private JLabel itemTotalLabel;
+    private JLabel cartSubtotalLabel;
 
     private ButtonGroup sizesButtonGroup;
     private ButtonGroup crustButtonGroup;
@@ -32,6 +34,9 @@ public class PizzaPage {
 
     private ArrayList<JCheckBox> boxesToDisable = new ArrayList<JCheckBox>();
     private boolean disabled;
+
+    private double sizePrice;
+    private String itemTotalPrice;
 
     public PizzaPage() {
 
@@ -189,6 +194,50 @@ public class PizzaPage {
                 toggleCheckBox(extraCheeseCheckBox);
             }
         });
+        smallRadioButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setSizePrice(4.00);
+            }
+        });
+        mediumRadioButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setSizePrice(6.00);
+            }
+        });
+        largeRadioButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setSizePrice(8.00);
+            }
+        });
+        xLargeRadioButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setSizePrice(10.00);
+            }
+        });
     }
 
     public void addCheckBoxes(){
@@ -242,13 +291,33 @@ public class PizzaPage {
         disabled = false;
     }
 
+    public void setSizePrice(double sizePrice){
+        this.sizePrice = sizePrice;
+        updateItemTotal(this.sizePrice);
+    }
+
+    public void updateItemTotal(double sizePrice){
+        itemTotalPrice = String.format("%.2f",sizePrice);
+        itemTotalLabel.setText("Item Total: $" + itemTotalPrice);
+    }
+
+    //todo - put all of this into one function called reset page
+    //reasoning - these are all ONLY called when we exit the page
     public void resetCheckBoxes(){
+        //Resets checkboxes
         addCheckBoxes();
         enableCheckBoxes();
         toppingsCounter = 0;
         for(JCheckBox box: boxesToDisable){
             box.setSelected(false);
         }
+
+        //resetsRadioButtons
+        sizesButtonGroup.clearSelection();
+        crustButtonGroup.clearSelection();
+
+        //resets itemTotalLabel
+        itemTotalLabel.setText("Item Total: $0.00");
     }
 
     public void resetRadioButtons(){
