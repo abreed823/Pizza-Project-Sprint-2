@@ -1,5 +1,4 @@
-//TODO - add "please make all selections" labels, clean up code, update cart total, create image icon for logo,
-//TODO - change back buttons to cancel on menu, "item added successfully" label
+//TODO -  clean up code, update cart total, create image icon for logo, "item added successfully" label
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +17,7 @@ public class Main {
     private LoginPage login = new LoginPage(idsandPasswords.getLoginInfo());
     private CreateAccountPage createAccount = new CreateAccountPage();
     private CustomerWelcomePage customerWelcome = new CustomerWelcomePage();
-    private StartOrderPage startOrder = new StartOrderPage();
+    private static StartOrderPage startOrder = new StartOrderPage();
     private PizzaPage pizza = new PizzaPage();
     private SidesPage sides = new SidesPage();
     private DrinksPage drinks = new DrinksPage();
@@ -84,6 +83,10 @@ public class Main {
 
     public static boolean accountExists(String phoneNumber){
         return idsandPasswords.accountExists(phoneNumber);
+    }
+
+    public static void updateItemAddedLabel(boolean add){
+        startOrder.updateItemAddedLabel(add);
     }
 
     public static void main(String[] args){

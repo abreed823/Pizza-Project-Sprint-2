@@ -87,6 +87,7 @@ public class PizzaPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 resetPage();
+                Main.updateItemAddedLabel(false);
                 Main.showCardLayout("startOrder");
             }
         });
@@ -102,6 +103,7 @@ public class PizzaPage {
                     errorMessageLabel.setText("*Please make all required selections.");
                 }else {
                     resetPage();
+                    Main.updateItemAddedLabel(true);
                     Main.showCardLayout("startOrder");
                 }
             }

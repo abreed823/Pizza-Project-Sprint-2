@@ -10,6 +10,7 @@ public class StartOrderPage {
     private JButton drinksButton;
     private JButton viewCartButton;
     private JButton backButton;
+    private JLabel itemAddedLabel;
 
     public StartOrderPage() {
         logOutButton.addActionListener(new ActionListener() {
@@ -78,6 +79,14 @@ public class StartOrderPage {
                 Main.showCardLayout("viewCart");
             }
         });
+    }
+
+    public void updateItemAddedLabel(boolean add){
+        if(add) {
+            itemAddedLabel.setText("Item added successfully!");
+        }else{
+            itemAddedLabel.setText("");
+        }
     }
 
     public JPanel getPanel(){

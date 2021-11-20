@@ -35,6 +35,7 @@ public class SidesPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 resetPage();
+                Main.updateItemAddedLabel(false);
                 Main.showCardLayout("startOrder");
             }
         });
@@ -50,6 +51,7 @@ public class SidesPage {
                     errorMessageLabel.setText("*Please make all required selections.");
                 }else {
                     resetPage();
+                    Main.updateItemAddedLabel(true);
                     Main.showCardLayout("startOrder");
                 }
             }

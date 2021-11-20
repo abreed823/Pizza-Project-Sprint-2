@@ -65,6 +65,7 @@ public class DrinksPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 resetPage();
+                Main.updateItemAddedLabel(false);
                 Main.showCardLayout("startOrder");
             }
         });
@@ -80,6 +81,7 @@ public class DrinksPage {
                     errorMessageLabel.setText("*Please make all required selections.");
                 }else {
                     resetPage();
+                    Main.updateItemAddedLabel(true);
                     Main.showCardLayout("startOrder");
                 }
             }

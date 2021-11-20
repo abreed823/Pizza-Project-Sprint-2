@@ -112,7 +112,7 @@
             </constraints>
             <properties>
               <font size="24"/>
-              <text value="Sides:"/>
+              <text value="*Sides:"/>
             </properties>
           </component>
           <hspacer id="bebf3">
