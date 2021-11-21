@@ -1,5 +1,5 @@
 //TODO -  update cart total on StartOrder, create image icon for logo, logout buttons reset application
-// create orders object, move instance variables in main to constructor???, fix subtotal labels
+// create orders object, move instance variables in Main to constructor???,
 
 import javax.swing.*;
 import java.awt.*;
