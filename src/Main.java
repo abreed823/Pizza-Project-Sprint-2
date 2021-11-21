@@ -1,4 +1,12 @@
-//TODO -  clean up code, update cart total, create image icon for logo, "item added successfully" label
+/**
+ *Sprint 2 code for SWE 3313 Pizza Project
+ * Links together all of the pages for the ordering system for Mom and Pop's Pizza Shop
+ *
+ * @author Team 2
+ * @version 1.2
+ * */
+
+//TODO -  clean up code, update cart total, create image icon for logo
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,12 +15,9 @@ public class Main {
     private JFrame frame = new JFrame("Mom and Pop's Pizza Shop");
     private static JPanel contentPanel = new JPanel();
     private static CardLayout cl = new CardLayout(20, 20);
+
+    //Initializes all pages
     private static IDsandPasswords idsandPasswords = new IDsandPasswords();
-//    private WelcomePage welcomePage = new WelcomePage();
-//    private LoginPageExample loginPage = new LoginPageExample();
-
-    //private LoginPageExample loginPage = new LoginPageExample(idsandPasswords.getLoginInfo());
-
     private WelcomePage welcomePage = new WelcomePage();
     private LoginPage login = new LoginPage(idsandPasswords.getLoginInfo());
     private CreateAccountPage createAccount = new CreateAccountPage();
@@ -28,6 +33,7 @@ public class Main {
     private ReceiptPage receipt = new ReceiptPage();
     private PrintPage print = new PrintPage();
 
+    //Converts all page classes to panels
     private JPanel welcomePagePanel = welcomePage.getPanel();
     private JPanel loginPagePanel = login.getPanel();
     private JPanel createAccountPanel = createAccount.getPanel();
@@ -43,6 +49,9 @@ public class Main {
     private JPanel receiptPanel = receipt.getPanel();
     private JPanel printPanel = print.getPanel();
 
+    /**
+     * Adds all pages to the frame to be displayed
+     * */
     public Main(){
         contentPanel.setLayout(cl);
         contentPanel.add(welcomePagePanel, "welcome");
@@ -62,33 +71,53 @@ public class Main {
 
         cl.show(contentPanel, "welcome");
 
-//        , BorderLayout.CENTER
         frame.add(contentPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
-        //frame.setLocationRelativeTo(null);
-        frame.setPreferredSize(new Dimension(1280,720));
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.pack();
         frame.setVisible(true);
     }
 
-    //Allows the card layout to be controlled by other objects/pages
+    /**
+     * Allows the card layout to be controlled by other objects/pages
+     *
+     * @param cardName the name of the card/panel/page to be displayed
+     * */
     public static void showCardLayout(String cardName){
         cl.show(contentPanel, cardName);
     }
 
+    /**
+     * Adds new username and password combination that can be used when the user logs in
+     *
+     * @param phoneNumber the phone number to be added to the idsAndPasswords HashMap
+     * @param password the password to be added to the idsAndPasswords HashMap
+     * */
     public static void addLogin(String phoneNumber, String password){
         idsandPasswords.addLogin(phoneNumber,password);
     }
 
+    /**
+     * Checks if the user tries to create an account with an existing password
+     *
+     * @param phoneNumber the phone number to be checked
+     * @return a boolean indicating if that phone number already exists as an account
+     * */
     public static boolean accountExists(String phoneNumber){
         return idsandPasswords.accountExists(phoneNumber);
     }
 
+    /**
+     * Updates the ItemAddedLabel on the Start Order page
+     *
+     * @param add a boolean indicating if an item has been added to the cart
+     * */
     public static void updateItemAddedLabel(boolean add){
         startOrder.updateItemAddedLabel(add);
     }
 
+    /***/
     public static void main(String[] args){
         SwingUtilities.invokeLater(new Runnable() {
             @Override
