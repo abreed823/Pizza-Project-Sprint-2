@@ -17,7 +17,7 @@ public class CreateAccountPage {
     private JFormattedTextField addressTextField;
     private JButton backButton;
     private JButton createButton;
-    private JPanel panelCreateAccount;
+    private JPanel createAccountPanel;
     private JPasswordField passwordField;
     private JPasswordField confirmPasswordField;
     private JLabel errorMessageLabel;
@@ -35,6 +35,9 @@ public class CreateAccountPage {
         } catch (ParseException e) {
              e.printStackTrace();
         }
+
+        phoneNumberTextField.setCaretPosition(0);
+
         backButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -94,6 +97,6 @@ public class CreateAccountPage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelCreateAccount;
+        return createAccountPanel;
     }
 }

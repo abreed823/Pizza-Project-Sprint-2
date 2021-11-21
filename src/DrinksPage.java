@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DrinksPage {
-    private JPanel panelDrinks;
+    private JPanel drinksPanel;
     private JButton logOutButton;
     private JRadioButton pepsiRadioButton;
     private JRadioButton orangeRadioButton1;
@@ -95,7 +95,7 @@ public class DrinksPage {
                 }
             }
         });
-        ActionListener listener = new ActionListener() {
+        ActionListener sizeButtonListener = new ActionListener() {
             /**
              * Invoked when an action occurs.
              *
@@ -107,10 +107,10 @@ public class DrinksPage {
                 updateItemTotalLabel();
             }
         };
-        smallRadioButton.addActionListener(listener);
-        mediumRadioButton.addActionListener(listener);
-        largeRadioButton.addActionListener(listener);
-        ActionListener listener1 = new ActionListener() {
+        smallRadioButton.addActionListener(sizeButtonListener);
+        mediumRadioButton.addActionListener(sizeButtonListener);
+        largeRadioButton.addActionListener(sizeButtonListener);
+        ActionListener drinkButtonListener = new ActionListener() {
             /**
              * Invoked when an action occurs.
              *
@@ -122,14 +122,14 @@ public class DrinksPage {
                 updateItemTotalLabel();
             }
         };
-        pepsiRadioButton.addActionListener(listener1);
-        orangeRadioButton1.addActionListener(listener1);
-        rootBeerRadioButton.addActionListener(listener1);
-        dietRootBeerRadioButton.addActionListener(listener1);
-        dietOrangeRadioButton.addActionListener(listener1);
-        dietPepsiRadioButton.addActionListener(listener1);
-        sierraMistRadioButton.addActionListener(listener1);
-        lemonadeRadioButton.addActionListener(listener1);
+        pepsiRadioButton.addActionListener(drinkButtonListener);
+        orangeRadioButton1.addActionListener(drinkButtonListener);
+        rootBeerRadioButton.addActionListener(drinkButtonListener);
+        dietRootBeerRadioButton.addActionListener(drinkButtonListener);
+        dietOrangeRadioButton.addActionListener(drinkButtonListener);
+        dietPepsiRadioButton.addActionListener(drinkButtonListener);
+        sierraMistRadioButton.addActionListener(drinkButtonListener);
+        lemonadeRadioButton.addActionListener(drinkButtonListener);
     }
 
     /**
@@ -161,6 +161,6 @@ public class DrinksPage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelDrinks;
+        return drinksPanel;
     }
 }

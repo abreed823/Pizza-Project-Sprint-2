@@ -6,7 +6,7 @@
  * @version 1.2
  * */
 
-//TODO -  clean up code, update cart total, create image icon for logo
+//TODO -  update cart total, create image icon for logo, log out buttons reset application
 
 import javax.swing.*;
 import java.awt.*;

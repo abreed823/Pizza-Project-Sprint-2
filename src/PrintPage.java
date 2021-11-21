@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PrintPage {
-    private JPanel panelPrint;
+    private JPanel printPanel;
     private JButton logOutButton;
 
     /**
@@ -34,6 +34,6 @@ public class PrintPage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelPrint;
+        return printPanel;
     }
 }

@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class PayCashPage {
     private JButton logOutButton;
-    private JPanel panelPayCash;
+    private JPanel payCashPanel;
     private JButton backButton;
     private JButton continueButton;
 
@@ -58,6 +58,6 @@ public class PayCashPage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelPayCash;
+        return payCashPanel;
     }
 }

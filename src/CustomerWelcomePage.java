@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CustomerWelcomePage {
-    private JPanel panelCustomerWelcome;
+    private JPanel customerWelcomePanel;
     private JButton logOutButton;
     private JButton startNewOrderButton;
 
@@ -46,6 +46,6 @@ public class CustomerWelcomePage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelCustomerWelcome;
+        return customerWelcomePanel;
     }
 }
