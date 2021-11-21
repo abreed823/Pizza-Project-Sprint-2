@@ -3,10 +3,12 @@
  *
  * @author Team 2
  */
-
+//TODO fix issue - update subtotal labels whenever a page is opened, not just whn you add to cart
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
 public class PizzaPage {
@@ -111,6 +113,7 @@ public class PizzaPage {
                 if(!(sizeSelected && crustSelected)){
                     errorMessageLabel.setText("*Please make all required selections.");
                 }else {
+                    Main.updateCartTotal(sizePrice + toppingsPrice);
                     resetPage();
                     Main.updateItemAddedLabel(true);
                     Main.showCardLayout("startOrder");
@@ -279,6 +282,18 @@ public class PizzaPage {
         originalRadioButton.addActionListener(listener);
         panRadioButton.addActionListener(listener);
         thinRadioButton.addActionListener(listener);
+        pizzaPanel.addComponentListener(new ComponentAdapter() {
+            /**
+             * Invoked when the component has been made visible.
+             *
+             * @param e
+             */
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                updateCartSubtotalLabel();
+            }
+        });
     }
 
     /**
@@ -377,6 +392,13 @@ public class PizzaPage {
     public void updateItemTotal(double sizePrice, double toppingsPrice){
         itemTotalPrice = String.format("%.2f",sizePrice + toppingsPrice);
         itemTotalLabel.setText("Item Total: $" + itemTotalPrice);
+    }
+
+    /**
+     * Updates the cart subtotal label
+     */
+    public void updateCartSubtotalLabel(){
+        cartSubtotalLabel.setText(Main.getCartTotal());
     }
 
     /**

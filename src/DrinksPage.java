@@ -7,6 +7,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class DrinksPage {
     private JPanel drinksPanel;
@@ -38,6 +40,7 @@ public class DrinksPage {
      * Constructor
      */
     public DrinksPage() {
+
         drinksButtonGroup = new ButtonGroup();
         drinksButtonGroup.add(pepsiRadioButton);
         drinksButtonGroup.add(dietPepsiRadioButton);
@@ -89,6 +92,7 @@ public class DrinksPage {
                 if(!(sizeSelected && drinkSelected)){
                     errorMessageLabel.setText("*Please make all required selections.");
                 }else {
+                    Main.updateCartTotal(1);
                     resetPage();
                     Main.updateItemAddedLabel(true);
                     Main.showCardLayout("startOrder");
@@ -130,6 +134,18 @@ public class DrinksPage {
         dietPepsiRadioButton.addActionListener(drinkButtonListener);
         sierraMistRadioButton.addActionListener(drinkButtonListener);
         lemonadeRadioButton.addActionListener(drinkButtonListener);
+        drinksPanel.addComponentListener(new ComponentAdapter() {
+            /**
+             * Invoked when the component has been made visible.
+             *
+             * @param e
+             */
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                updateCartSubtotalLabel();
+            }
+        });
     }
 
     /**
@@ -139,6 +155,13 @@ public class DrinksPage {
         if(sizeSelected && drinkSelected){
             itemTotalLabel.setText("Item Total: $1.00");
         }
+    }
+
+    /**
+     * Updates the cart subtotal label
+     */
+    public void updateCartSubtotalLabel(){
+        cartSubtotalLabel.setText(Main.getCartTotal());
     }
 
     /**
