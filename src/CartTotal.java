@@ -13,7 +13,7 @@ public class CartTotal {
      */
     CartTotal(){
         cartTotal = 0;
-        totalPriceString = "Subtotal: $" + String.format("%.2f", cartTotal);
+        totalPriceString = "Cart Subtotal: $" + String.format("%.2f", cartTotal);
         //cartTotalLabel.setText("Subtotal: $" + totalPriceString);
     }
 
@@ -31,6 +31,6 @@ public class CartTotal {
      */
     public void updateCartTotal(double price){
         cartTotal += price;
-        totalPriceString = "Subtotal: $" + String.format("%.2f", cartTotal);
+        totalPriceString = "Cart Subtotal: $" + String.format("%.2f", cartTotal);
     }
 }

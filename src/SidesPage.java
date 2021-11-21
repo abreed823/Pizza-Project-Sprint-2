@@ -5,6 +5,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
 public class SidesPage {
@@ -28,8 +30,6 @@ public class SidesPage {
      * Constructor
      */
     public SidesPage() {
-
-        updateCartSubtotalLabel();
 
         checkBoxes = new ArrayList<JCheckBox>();
         checkBoxes.add(breadBitesCheckBox);
@@ -61,7 +61,6 @@ public class SidesPage {
                     errorMessageLabel.setText("*Please make all required selections.");
                 }else {
                     Main.updateCartTotal(sidesPrice);
-                    updateCartSubtotalLabel();
                     resetPage();
                     Main.updateItemAddedLabel(true);
                     Main.showCardLayout("startOrder");
@@ -111,6 +110,18 @@ public class SidesPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateSidesPrice(cookieCheckBox, 4);
+            }
+        });
+        sidesPanel.addComponentListener(new ComponentAdapter() {
+            /**
+             * Invoked when the component has been made visible.
+             *
+             * @param e
+             */
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                updateCartSubtotalLabel();
             }
         });
     }

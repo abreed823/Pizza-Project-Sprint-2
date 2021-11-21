@@ -7,6 +7,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class DrinksPage {
     private JPanel drinksPanel;
@@ -38,8 +40,6 @@ public class DrinksPage {
      * Constructor
      */
     public DrinksPage() {
-
-        updateCartSubtotalLabel();
 
         drinksButtonGroup = new ButtonGroup();
         drinksButtonGroup.add(pepsiRadioButton);
@@ -93,7 +93,6 @@ public class DrinksPage {
                     errorMessageLabel.setText("*Please make all required selections.");
                 }else {
                     Main.updateCartTotal(1);
-                    updateCartSubtotalLabel();
                     resetPage();
                     Main.updateItemAddedLabel(true);
                     Main.showCardLayout("startOrder");
@@ -135,6 +134,18 @@ public class DrinksPage {
         dietPepsiRadioButton.addActionListener(drinkButtonListener);
         sierraMistRadioButton.addActionListener(drinkButtonListener);
         lemonadeRadioButton.addActionListener(drinkButtonListener);
+        drinksPanel.addComponentListener(new ComponentAdapter() {
+            /**
+             * Invoked when the component has been made visible.
+             *
+             * @param e
+             */
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                updateCartSubtotalLabel();
+            }
+        });
     }
 
     /**
