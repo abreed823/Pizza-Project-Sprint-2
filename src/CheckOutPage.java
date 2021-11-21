@@ -17,10 +17,20 @@ public class CheckOutPage {
     private JButton backButton;
     private JButton continueButton;
 
+    private ButtonGroup paymentMethodButtonGroup;
+
+    private boolean payWithCard;
+    private boolean paymentMethodSelected;
+
     /**
      * Constructor
      */
     public CheckOutPage() {
+        paymentMethodButtonGroup = new ButtonGroup();
+        paymentMethodButtonGroup.add(cardRadioButton);
+        paymentMethodButtonGroup.add(cashRadioButton);
+        paymentMethodButtonGroup.add(checkRadioButton);
+
         logOutButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -40,7 +50,8 @@ public class CheckOutPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.showCardLayout("startOrder");
+                resetPage();
+                Main.showCardLayout("viewCart");
             }
         });
         continueButton.addActionListener(new ActionListener() {
@@ -51,9 +62,49 @@ public class CheckOutPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.showCardLayout("payCash");
+                if(payWithCard && paymentMethodSelected){
+                    resetPage();
+                    Main.showCardLayout("payCard");
+                }else if(!payWithCard && paymentMethodSelected){
+                    resetPage();
+                    Main.showCardLayout("payCash");
+                }
             }
         });
+        cardRadioButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                payWithCard = true;
+                paymentMethodSelected = true;
+            }
+        });
+        ActionListener cashCheckListener = new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                payWithCard = false;
+                paymentMethodSelected = true;
+            }
+        };
+        cashRadioButton.addActionListener(cashCheckListener);
+        checkRadioButton.addActionListener(cashCheckListener);
+    }
+
+    /**
+     * Resets the page to its original state
+     */
+    public void resetPage(){
+        paymentMethodButtonGroup.clearSelection();
+        paymentMethodSelected = false;
     }
 
     /**

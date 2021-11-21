@@ -35,6 +35,9 @@ public class CreateAccountPage {
         } catch (ParseException e) {
              e.printStackTrace();
         }
+
+        phoneNumberTextField.setCaretPosition(0);
+
         backButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
