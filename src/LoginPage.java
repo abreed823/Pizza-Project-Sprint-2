@@ -12,7 +12,7 @@ import java.text.ParseException;
 import java.util.HashMap;
 
 public class LoginPage {
-    private JPanel panelLogIn;
+    private JPanel logInPanel;
     private JFormattedTextField phoneNumberField;
     private JButton backButton;
     private JButton logInButton;
@@ -89,6 +89,6 @@ public class LoginPage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelLogIn;
+        return logInPanel;
     }
 }

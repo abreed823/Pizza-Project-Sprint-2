@@ -9,8 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class WelcomePage {
-    private JPanel panelWelcome;
-    private JLabel labelWelcome;
+    private JPanel welcomePanel;
     private JButton logInButton;
     private JButton createAccountButton;
 
@@ -48,6 +47,6 @@ public class WelcomePage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelWelcome;
+        return welcomePanel;
     }
 }

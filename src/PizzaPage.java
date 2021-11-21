@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class PizzaPage {
     private JButton logOutButton;
-    private JPanel panelPizza;
+    private JPanel pizzaPanel;
     private JRadioButton smallRadioButton;
     private JRadioButton mediumRadioButton;
     private JRadioButton largeRadioButton;
@@ -408,6 +408,6 @@ public class PizzaPage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelPizza;
+        return pizzaPanel;
     }
 }

@@ -10,11 +10,11 @@ import java.awt.event.ActionListener;
 
 public class PayCardPage {
     private JButton logOutButton;
-    private JPanel panelPayCard;
-    private JFormattedTextField formattedTextField1;
-    private JFormattedTextField formattedTextField2;
-    private JFormattedTextField formattedTextField3;
-    private JFormattedTextField formattedTextField4;
+    private JPanel payCardPanel;
+    private JFormattedTextField nameTextField;
+    private JFormattedTextField cardNumberTextField;
+    private JFormattedTextField expDateTextField;
+    private JFormattedTextField cvvTextField;
     private JButton backButton;
     private JButton finishPayButton;
 
@@ -51,6 +51,6 @@ public class PayCardPage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelPayCard;
+        return payCardPanel;
     }
 }

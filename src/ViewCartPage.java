@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class ViewCartPage {
     private JButton logOutButton;
-    private JPanel panelPayCard;
+    private JPanel viewCartPanel;
     private JButton continueButton;
     private JButton backButton;
 
@@ -58,6 +58,6 @@ public class ViewCartPage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelPayCard;
+        return viewCartPanel;
     }
 }

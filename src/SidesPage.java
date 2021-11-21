@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class SidesPage {
     private JButton logOutButton;
-    private JPanel panelSides;
+    private JPanel sidesPanel;
     private JCheckBox breadSticksCheckBox;
     private JCheckBox breadBitesCheckBox;
     private JCheckBox cookieCheckBox;
@@ -157,6 +157,6 @@ public class SidesPage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelSides;
+        return sidesPanel;
     }
 }

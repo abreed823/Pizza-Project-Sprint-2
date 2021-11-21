@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class ReceiptPage {
     private JButton logOutButton;
-    private JPanel panelReceipt;
+    private JPanel receiptPanel;
     private JButton printButton;
     private JButton exitButton;
 
@@ -47,6 +47,6 @@ public class ReceiptPage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelReceipt;
+        return receiptPanel;
     }
 }

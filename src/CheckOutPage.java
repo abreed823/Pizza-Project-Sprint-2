@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CheckOutPage {
-    private JPanel panelCheckOut;
+    private JPanel checkOutPanel;
     private JButton logOutButton;
     private JRadioButton cardRadioButton;
     private JRadioButton cashRadioButton;
@@ -61,6 +61,6 @@ public class CheckOutPage {
      * @return the panel to return
      */
     public JPanel getPanel(){
-        return panelCheckOut;
+        return checkOutPanel;
     }
 }
