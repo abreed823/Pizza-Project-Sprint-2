@@ -1,3 +1,9 @@
+/**
+ * The functionality and display for the drink ordering page
+ *
+ * @author Team 2
+ */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +34,9 @@ public class DrinksPage {
     private boolean sizeSelected;
     private boolean drinkSelected;
 
+    /**
+     * Constructor
+     */
     public DrinksPage() {
         drinksButtonGroup = new ButtonGroup();
         drinksButtonGroup.add(pepsiRadioButton);
@@ -123,12 +132,18 @@ public class DrinksPage {
         lemonadeRadioButton.addActionListener(listener1);
     }
 
+    /**
+     * Updates the Item Total label
+     */
     public void updateItemTotalLabel(){
         if(sizeSelected && drinkSelected){
             itemTotalLabel.setText("Item Total: $1.00");
         }
     }
 
+    /**
+     * Resets the page to its original state
+     */
     public void resetPage(){
         drinksButtonGroup.clearSelection();
         sizesButtonGroup.clearSelection();
@@ -141,6 +156,10 @@ public class DrinksPage {
         errorMessageLabel.setText("*Required");
     }
 
+    /**
+     * Returns the JPanel to the Main class
+     * @return the panel to return
+     */
     public JPanel getPanel(){
         return panelDrinks;
     }

@@ -1,3 +1,9 @@
+/**
+ * The functionality and display for the Pay With Card page
+ *
+ * @author Team 2
+ */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +18,9 @@ public class PayCardPage {
     private JButton backButton;
     private JButton finishPayButton;
 
+    /**
+     * Constructor
+     */
     public PayCardPage() {
         logOutButton.addActionListener(new ActionListener() {
             /**
@@ -37,6 +46,10 @@ public class PayCardPage {
         });
     }
 
+    /**
+     * Returns the JPanel to the Main class
+     * @return the panel to return
+     */
     public JPanel getPanel(){
         return panelPayCard;
     }

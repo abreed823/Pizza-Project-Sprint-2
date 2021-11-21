@@ -1,3 +1,9 @@
+/**
+ * The functionality and display for the Pizza Ordering page
+ *
+ * @author Team 2
+ */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,6 +50,9 @@ public class PizzaPage {
     private boolean sizeSelected;
     private boolean crustSelected;
 
+    /**
+     * Constructor
+     */
     public PizzaPage() {
 
         sizeSelected = false;
@@ -272,6 +281,9 @@ public class PizzaPage {
         thinRadioButton.addActionListener(listener);
     }
 
+    /**
+     * Adds all of the checkboxes to an ArrayList
+     */
     public void addCheckBoxes(){
         boxesToDisable.clear();
         boxesToDisable.add(pepperoniCheckBox);
@@ -285,6 +297,10 @@ public class PizzaPage {
         boxesToDisable.add(extraCheeseCheckBox);
     }
 
+    /**
+     * Updates the boxesToDisable ArrayList whenever a checkbox is toggled
+     * @param box the box that is toggled
+     */
     public void toggleCheckBox(JCheckBox box){
         if(box.isSelected()){
             boxesToDisable.remove(box);
@@ -295,8 +311,12 @@ public class PizzaPage {
         }
     }
 
-    public void changeToppingsCounter(boolean add){
-        if(add){
+    /**
+     * Updates the topping counter and price whenever a checkbox is toggled
+     * @param boxIsChecked indicates whether a box has been checked or not
+     */
+    public void changeToppingsCounter(boolean boxIsChecked){
+        if(boxIsChecked){
             toppingsCounter++;
         }else{
             toppingsCounter--;
@@ -309,6 +329,9 @@ public class PizzaPage {
         }
     }
 
+    /**
+     * Disables all checkboxes left is the ArrayList
+     */
     public void disableCheckBoxes(){
         for(JCheckBox box: boxesToDisable){
             box.setEnabled(false);
@@ -316,6 +339,9 @@ public class PizzaPage {
         disabled = true;
     }
 
+    /**
+     * Enables all checkboxes
+     */
     public void enableCheckBoxes(){
         for(JCheckBox box: boxesToDisable){
             box.setEnabled(true);
@@ -323,24 +349,40 @@ public class PizzaPage {
         disabled = false;
     }
 
+    /**
+     * Updates the price of the pizza based on the size
+     * @param sizePrice the prize of the selected pizza size
+     */
     public void updateSizePrice(double sizePrice){
         sizeSelected = true;
         this.sizePrice = sizePrice;
         updateToppingsPrice(pricePerTopping, toppingsCounter);
     }
 
+    /**
+     * Updates the price of the toppings depending on the pizza size
+     * @param pricePerTopping the price per topping
+     * @param toppingsCounter how many topping are selected
+     */
     public void updateToppingsPrice(double pricePerTopping, double toppingsCounter){
         toppingsPrice = pricePerTopping * toppingsCounter;
         updateItemTotal(sizePrice, toppingsPrice);
     }
 
+    /**
+     * Updates the total price of the pizza
+     * @param sizePrice the prize of the pizza size
+     * @param toppingsPrice the price of the toppings
+     */
     public void updateItemTotal(double sizePrice, double toppingsPrice){
         itemTotalPrice = String.format("%.2f",sizePrice + toppingsPrice);
         itemTotalLabel.setText("Item Total: $" + itemTotalPrice);
     }
 
+    /**
+     * Resets the page to its original state
+     */
     public void resetPage(){
-        //Resets checkboxes
         addCheckBoxes();
         enableCheckBoxes();
         toppingsCounter = 0;
@@ -348,14 +390,12 @@ public class PizzaPage {
             box.setSelected(false);
         }
 
-        //resetsRadioButtons
         sizesButtonGroup.clearSelection();
         crustButtonGroup.clearSelection();
 
         pricePerTopping = 0;
         sizePrice = 0;
 
-        //resets appropriate labels
         itemTotalLabel.setText("Item Total: $0.00");
         errorMessageLabel.setText("*Required");
 
@@ -363,6 +403,10 @@ public class PizzaPage {
         crustSelected = false;
     }
 
+    /**
+     * Returns the JPanel to the Main class
+     * @return the panel to return
+     */
     public JPanel getPanel(){
         return panelPizza;
     }
