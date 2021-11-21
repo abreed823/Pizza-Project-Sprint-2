@@ -1,3 +1,9 @@
+/**
+ * The display and functionality for the checkout page
+ *
+ * @author Team 2
+ */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +17,9 @@ public class CheckOutPage {
     private JButton backButton;
     private JButton continueButton;
 
+    /**
+     * Constructor
+     */
     public CheckOutPage() {
         logOutButton.addActionListener(new ActionListener() {
             /**
@@ -47,6 +56,10 @@ public class CheckOutPage {
         });
     }
 
+    /**
+     * Returns the JPanel to the Main class
+     * @return the panel to return
+     */
     public JPanel getPanel(){
         return panelCheckOut;
     }

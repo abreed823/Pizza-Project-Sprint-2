@@ -1,3 +1,9 @@
+/**
+ * The functionality and display for the Welcome page
+ *
+ * @author Team 2
+ */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +14,9 @@ public class WelcomePage {
     private JButton logInButton;
     private JButton createAccountButton;
 
+    /**
+     * Constructor
+     */
     public WelcomePage() {
         logInButton.addActionListener(new ActionListener() {
             /**
@@ -34,6 +43,10 @@ public class WelcomePage {
         });
     }
 
+    /**
+     * Returns the JPanel to the Main class
+     * @return the panel to return
+     */
     public JPanel getPanel(){
         return panelWelcome;
     }

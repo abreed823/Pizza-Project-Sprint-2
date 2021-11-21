@@ -1,3 +1,9 @@
+/**
+ * The functionality and display for the Customer Welcome page
+ *
+ * @author Team 2
+ */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +13,9 @@ public class CustomerWelcomePage {
     private JButton logOutButton;
     private JButton startNewOrderButton;
 
+    /**
+     * Constructor
+     */
     public CustomerWelcomePage() {
         startNewOrderButton.addActionListener(new ActionListener() {
             /**
@@ -32,6 +41,10 @@ public class CustomerWelcomePage {
         });
     }
 
+    /**
+     * Returns the JPanel to the Main class
+     * @return the panel to return
+     */
     public JPanel getPanel(){
         return panelCustomerWelcome;
     }

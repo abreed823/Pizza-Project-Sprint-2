@@ -1,3 +1,9 @@
+/**
+ * The functionality and display for the Create Account page
+ *
+ * @author Team 2
+ */
+
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
@@ -16,6 +22,9 @@ public class CreateAccountPage {
     private JPasswordField confirmPasswordField;
     private JLabel errorMessageLabel;
 
+    /**
+     * Constructor
+     */
     public CreateAccountPage() {
         MaskFormatter phoneNumFormat;
         try {
@@ -80,6 +89,10 @@ public class CreateAccountPage {
         });
     }
 
+    /**
+     * Returns the JPanel to the Main class
+     * @return the panel to return
+     */
     public JPanel getPanel(){
         return panelCreateAccount;
     }

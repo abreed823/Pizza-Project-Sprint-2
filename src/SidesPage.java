@@ -1,3 +1,7 @@
+/**
+ * The functionality and display for the Sides Selection page
+ */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +24,9 @@ public class SidesPage {
     private double sidesPrice;
     private String totalPrice;
 
+    /**
+     * Constructor
+     */
     public SidesPage() {
         checkBoxes = new ArrayList<JCheckBox>();
         checkBoxes.add(breadBitesCheckBox);
@@ -103,6 +110,11 @@ public class SidesPage {
         });
     }
 
+    /**
+     * Updates the total price of the decides depending on if a checkbox is selected
+     * @param box the checkbox that was toggled
+     * @param itemPrice the price of the side item that was toggled
+     */
     public void updateSidesPrice(JCheckBox box, double itemPrice){
         if(box.isSelected()){
             sidesPrice += itemPrice;
@@ -113,6 +125,10 @@ public class SidesPage {
         itemTotalLabel.setText("Item Total: $" + totalPrice);
     }
 
+    /**
+     * Determines if there are any side item checkboxes selected
+     * @return if there are any side item checkboxes selected
+     */
     public boolean sidesAreSelected(){
         for(JCheckBox box: checkBoxes){
             if(box.isSelected()){
@@ -122,6 +138,9 @@ public class SidesPage {
         return false;
     }
 
+    /**
+     * Resets the page to its original state
+     */
     public void resetPage(){
         for(JCheckBox checkBox: checkBoxes){
             checkBox.setSelected(false);
@@ -133,6 +152,10 @@ public class SidesPage {
         errorMessageLabel.setText("*Required");
     }
 
+    /**
+     * Returns the JPanel to the Main class
+     * @return the panel to return
+     */
     public JPanel getPanel(){
         return panelSides;
     }

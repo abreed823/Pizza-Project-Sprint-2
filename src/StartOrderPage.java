@@ -1,3 +1,9 @@
+/**
+ * The functionality and display for the Start Order page
+ *
+ * @author Team 2
+ */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +18,9 @@ public class StartOrderPage {
     private JButton backButton;
     private JLabel itemAddedLabel;
 
+    /**
+     * Constructor
+     */
     public StartOrderPage() {
         logOutButton.addActionListener(new ActionListener() {
             /**
@@ -81,6 +90,10 @@ public class StartOrderPage {
         });
     }
 
+    /**
+     * Updates the Item Added labled
+     * @param add if an item was added to the cart
+     */
     public void updateItemAddedLabel(boolean add){
         if(add) {
             itemAddedLabel.setText("Item added successfully!");
@@ -89,6 +102,10 @@ public class StartOrderPage {
         }
     }
 
+    /**
+     * Returns the JPanel to the Main class
+     * @return the panel to return
+     */
     public JPanel getPanel(){
         return panelStartOrder;
     }
