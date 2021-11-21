@@ -1,3 +1,9 @@
+//TODO -  update cart total on StartOrder, create image icon for logo, logout buttons reset application
+// create orders object, move instance variables in main to constructor???, fix subtotal labels
+
+import javax.swing.*;
+import java.awt.*;
+
 /**
  *Sprint 2 code for SWE 3313 Pizza Project
  * Links together all of the pages for the ordering system for Mom and Pop's Pizza Shop
@@ -5,12 +11,6 @@
  * @author Team 2
  * @version 1.2
  * */
-
-//TODO -  update cart total, create image icon for logo, log out buttons reset application
-
-import javax.swing.*;
-import java.awt.*;
-
 public class Main {
     private JFrame frame = new JFrame("Mom and Pop's Pizza Shop");
     private static JPanel contentPanel = new JPanel();
@@ -32,6 +32,7 @@ public class Main {
     private PayCashPage payCash = new PayCashPage();
     private ReceiptPage receipt = new ReceiptPage();
     private PrintPage print = new PrintPage();
+    private static CartTotal cartTotal = new CartTotal();
 
     //Converts all page classes to panels
     private JPanel welcomePagePanel = welcomePage.getPanel();
@@ -117,6 +118,18 @@ public class Main {
         startOrder.updateItemAddedLabel(add);
     }
 
+    //TODO - figure out what this is for lol
+    public static String getCartTotal(){
+        return cartTotal.getCartTotal();
+    }
+
+    /**
+     * Updates the total price of the cart
+     * @param price the price to add to the cart
+     */
+    public static void updateCartTotal(double price){
+        cartTotal.updateCartTotal(price);
+    }
 
     public static void main(String[] args){
         SwingUtilities.invokeLater(new Runnable() {

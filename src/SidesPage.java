@@ -28,6 +28,9 @@ public class SidesPage {
      * Constructor
      */
     public SidesPage() {
+
+        updateCartSubtotalLabel();
+
         checkBoxes = new ArrayList<JCheckBox>();
         checkBoxes.add(breadBitesCheckBox);
         checkBoxes.add(breadSticksCheckBox);
@@ -57,6 +60,8 @@ public class SidesPage {
                 if(!sidesAreSelected()){
                     errorMessageLabel.setText("*Please make all required selections.");
                 }else {
+                    Main.updateCartTotal(sidesPrice);
+                    updateCartSubtotalLabel();
                     resetPage();
                     Main.updateItemAddedLabel(true);
                     Main.showCardLayout("startOrder");
@@ -136,6 +141,13 @@ public class SidesPage {
             }
         }
         return false;
+    }
+
+    /**
+     * Updates the cart subtotal label
+     */
+    public void updateCartSubtotalLabel(){
+        cartSubtotalLabel.setText(Main.getCartTotal());
     }
 
     /**

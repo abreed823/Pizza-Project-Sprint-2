@@ -38,6 +38,9 @@ public class DrinksPage {
      * Constructor
      */
     public DrinksPage() {
+
+        updateCartSubtotalLabel();
+
         drinksButtonGroup = new ButtonGroup();
         drinksButtonGroup.add(pepsiRadioButton);
         drinksButtonGroup.add(dietPepsiRadioButton);
@@ -89,6 +92,8 @@ public class DrinksPage {
                 if(!(sizeSelected && drinkSelected)){
                     errorMessageLabel.setText("*Please make all required selections.");
                 }else {
+                    Main.updateCartTotal(1);
+                    updateCartSubtotalLabel();
                     resetPage();
                     Main.updateItemAddedLabel(true);
                     Main.showCardLayout("startOrder");
@@ -139,6 +144,13 @@ public class DrinksPage {
         if(sizeSelected && drinkSelected){
             itemTotalLabel.setText("Item Total: $1.00");
         }
+    }
+
+    /**
+     * Updates the cart subtotal label
+     */
+    public void updateCartSubtotalLabel(){
+        cartSubtotalLabel.setText(Main.getCartTotal());
     }
 
     /**

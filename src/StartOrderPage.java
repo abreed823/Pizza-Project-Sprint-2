@@ -17,11 +17,15 @@ public class StartOrderPage {
     private JButton viewCartButton;
     private JButton backButton;
     private JLabel itemAddedLabel;
+    private JLabel cartTotalLabel;
 
     /**
      * Constructor
      */
     public StartOrderPage() {
+
+        //cartTotalLabel.setText(Main.getCartTotal());
+
         logOutButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -91,7 +95,7 @@ public class StartOrderPage {
     }
 
     /**
-     * Updates the Item Added labled
+     * Updates the Item Added labeled
      * @param add if an item was added to the cart
      */
     public void updateItemAddedLabel(boolean add){

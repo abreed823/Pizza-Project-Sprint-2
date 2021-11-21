@@ -55,6 +55,9 @@ public class PizzaPage {
      */
     public PizzaPage() {
 
+        //TODO - Make this work lol
+        updateCartSubtotalLabel();
+
         sizeSelected = false;
         crustSelected = false;
 
@@ -111,6 +114,8 @@ public class PizzaPage {
                 if(!(sizeSelected && crustSelected)){
                     errorMessageLabel.setText("*Please make all required selections.");
                 }else {
+                    Main.updateCartTotal(sizePrice + toppingsPrice);
+                    updateCartSubtotalLabel();
                     resetPage();
                     Main.updateItemAddedLabel(true);
                     Main.showCardLayout("startOrder");
@@ -377,6 +382,13 @@ public class PizzaPage {
     public void updateItemTotal(double sizePrice, double toppingsPrice){
         itemTotalPrice = String.format("%.2f",sizePrice + toppingsPrice);
         itemTotalLabel.setText("Item Total: $" + itemTotalPrice);
+    }
+
+    /**
+     * Updates the cart subtotal label
+     */
+    public void updateCartSubtotalLabel(){
+        cartSubtotalLabel.setText(Main.getCartTotal());
     }
 
     /**
