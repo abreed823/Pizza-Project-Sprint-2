@@ -3,7 +3,7 @@
  *
  * @author Team 2
  */
-//TODO fix issue - update subtotal labels whenever a page is opened, not just whn you add to cart
+//TODO fix issue - update subtotal labels whenever a page is opened, not just when you add to cart
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +35,7 @@ public class PizzaPage {
     private JLabel itemTotalLabel;
     private JLabel cartSubtotalLabel;
     private JLabel errorMessageLabel;
+    private JComboBox quantityComboBox;
 
     private ButtonGroup sizesButtonGroup;
     private ButtonGroup crustButtonGroup;
@@ -112,8 +113,11 @@ public class PizzaPage {
             public void actionPerformed(ActionEvent e) {
                 if(!(sizeSelected && crustSelected)){
                     errorMessageLabel.setText("*Please make all required selections.");
+                }else if(quantityComboBox.getSelectedIndex() == 0){
+                    errorMessageLabel.setText("*Please select a quantity");
                 }else {
-                    Main.updateCartTotal(sizePrice + toppingsPrice);
+                    String[]
+                    Main.updateCartTotal((Double.parseDouble(getQuantity()))*(sizePrice + toppingsPrice));
                     resetPage();
                     Main.updateItemAddedLabel(true);
                     Main.showCardLayout("startOrder");
@@ -284,7 +288,7 @@ public class PizzaPage {
         thinRadioButton.addActionListener(listener);
         pizzaPanel.addComponentListener(new ComponentAdapter() {
             /**
-             * Invoked when the component has been made visible.
+             * Invoked when the component has been made visible
              *
              * @param e
              */
@@ -292,6 +296,17 @@ public class PizzaPage {
             public void componentShown(ComponentEvent e) {
                 super.componentShown(e);
                 updateCartSubtotalLabel();
+            }
+        });
+        quantityComboBox.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateItemTotal(sizePrice, toppingsPrice);
             }
         });
     }
@@ -390,7 +405,7 @@ public class PizzaPage {
      * @param toppingsPrice the price of the toppings
      */
     public void updateItemTotal(double sizePrice, double toppingsPrice){
-        itemTotalPrice = String.format("%.2f",sizePrice + toppingsPrice);
+        itemTotalPrice = String.format("%.2f",(Double.parseDouble(getQuantity()))*(sizePrice + toppingsPrice));
         itemTotalLabel.setText("Item Total: $" + itemTotalPrice);
     }
 
@@ -399,6 +414,17 @@ public class PizzaPage {
      */
     public void updateCartSubtotalLabel(){
         cartSubtotalLabel.setText(Main.getCartTotal());
+    }
+
+    /**
+     * Returns the pizza quantity that the user selects
+     * @return A string for the quantity of the pizza
+     */
+    public String getQuantity(){
+        if(quantityComboBox.getSelectedIndex() == 0 || quantityComboBox.getSelectedIndex() == 1){
+            return "1";
+        }
+        return String.valueOf(quantityComboBox.getSelectedItem());
     }
 
     /**
@@ -414,13 +440,11 @@ public class PizzaPage {
 
         sizesButtonGroup.clearSelection();
         crustButtonGroup.clearSelection();
-
         pricePerTopping = 0;
         sizePrice = 0;
-
+        quantityComboBox.setSelectedIndex(0);
         itemTotalLabel.setText("Item Total: $0.00");
         errorMessageLabel.setText("*Required");
-
         sizeSelected = false;
         crustSelected = false;
     }

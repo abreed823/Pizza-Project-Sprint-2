@@ -1,9 +1,10 @@
 import javax.swing.*;
-
+import java.util.ArrayList;
 /**
  * Updates the total for the user's car
  */
 public class CartTotal {
+    public static ArrayList<OrderItem> items = new ArrayList<OrderItem>();
     private double cartTotal;
     private String totalPriceString;
     //private JLabel cartTotalLabel;

@@ -29,6 +29,7 @@ public class DrinksPage {
     private JLabel itemTotalLabel;
     private JLabel cartSubtotalLabel;
     private JLabel errorMessageLabel;
+    private JComboBox quantityComboBox;
 
     private ButtonGroup drinksButtonGroup;
     private ButtonGroup sizesButtonGroup;
@@ -91,8 +92,10 @@ public class DrinksPage {
             public void actionPerformed(ActionEvent e) {
                 if(!(sizeSelected && drinkSelected)){
                     errorMessageLabel.setText("*Please make all required selections.");
+                }else if(quantityComboBox.getSelectedIndex() == 0){
+                    errorMessageLabel.setText("*Please select a quantity");
                 }else {
-                    Main.updateCartTotal(1);
+                    Main.updateCartTotal(Double.parseDouble(getQuantity()));
                     resetPage();
                     Main.updateItemAddedLabel(true);
                     Main.showCardLayout("startOrder");
@@ -108,7 +111,7 @@ public class DrinksPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sizeSelected = true;
-                updateItemTotalLabel();
+                updateItemTotalLabel(Integer.parseInt(getQuantity()));
             }
         };
         smallRadioButton.addActionListener(sizeButtonListener);
@@ -123,7 +126,7 @@ public class DrinksPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 drinkSelected = true;
-                updateItemTotalLabel();
+                updateItemTotalLabel(Integer.parseInt(getQuantity()));
             }
         };
         pepsiRadioButton.addActionListener(drinkButtonListener);
@@ -146,14 +149,25 @@ public class DrinksPage {
                 updateCartSubtotalLabel();
             }
         });
+        quantityComboBox.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateItemTotalLabel(Integer.parseInt(getQuantity()));
+            }
+        });
     }
 
     /**
      * Updates the Item Total label
      */
-    public void updateItemTotalLabel(){
+    public void updateItemTotalLabel(int quantity){
         if(sizeSelected && drinkSelected){
-            itemTotalLabel.setText("Item Total: $1.00");
+            itemTotalLabel.setText("Item Total: $" + quantity + ".00");
         }
     }
 
@@ -170,13 +184,22 @@ public class DrinksPage {
     public void resetPage(){
         drinksButtonGroup.clearSelection();
         sizesButtonGroup.clearSelection();
-
+        quantityComboBox.setSelectedIndex(0);
         itemTotalLabel.setText("Item Total: $0.00");
-
         sizeSelected = false;
         drinkSelected = false;
-
         errorMessageLabel.setText("*Required");
+    }
+
+    /**
+     * Returns the drink quantity that the user selects
+     * @return A string for the quantity of the drink
+     */
+    public String getQuantity(){
+        if(quantityComboBox.getSelectedIndex() == 0 || quantityComboBox.getSelectedIndex() == 1){
+            return "1";
+        }
+        return String.valueOf(quantityComboBox.getSelectedItem());
     }
 
     /**
