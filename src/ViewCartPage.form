@@ -109,7 +109,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="e46c5" class="javax.swing.JTable" binding="cartTable" default-binding="true">
+              <component id="e46c5" class="javax.swing.JTable" binding="viewCartTable">
                 <constraints/>
                 <properties>
                   <font size="18"/>

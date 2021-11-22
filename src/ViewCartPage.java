@@ -14,7 +14,7 @@ public class ViewCartPage {
     private JPanel viewCartPanel;
     private JButton continueButton;
     private JButton backButton;
-    private JTable cartTable;
+    private JTable viewCartTable;
 
     /**
      * Constructor

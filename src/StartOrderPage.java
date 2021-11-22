@@ -124,7 +124,7 @@ public class StartOrderPage {
      * Updates the cart subtotal label
      */
     public void updateCartSubtotalLabel(){
-        cartSubtotalLabel.setText(Main.getCartTotal());
+        cartSubtotalLabel.setText(Main.getCartTotalString());
     }
 
     /**

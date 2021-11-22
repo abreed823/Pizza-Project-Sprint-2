@@ -188,7 +188,6 @@ public class SidesPage {
      * Updates the total price of the decides depending on if a checkbox is selected
      *
      */
-    //JCheckBox box, double itemPrice
     public void updateSidesTotalPrice(){
         sidesPrice = breadSticksPrice + breadBitesPrice + cookiePrice;
         totalPrice = String.format("%.2f",sidesPrice);
@@ -212,7 +211,7 @@ public class SidesPage {
      * Updates the cart subtotal label
      */
     public void updateCartSubtotalLabel(){
-        cartSubtotalLabel.setText(Main.getCartTotal());
+        cartSubtotalLabel.setText(Main.getCartTotalString());
     }
 
     /**
@@ -248,6 +247,9 @@ public class SidesPage {
         return String.valueOf(cookieComboBox.getSelectedItem());
     }
 
+    /**
+     * Updates the price of the bread sticks
+     */
     public void updateSticksPrice(){
         if(breadSticksCheckBox.isSelected()){
             breadSticksPrice = Double.parseDouble(getSticksQuantity()) * 4;
@@ -257,6 +259,9 @@ public class SidesPage {
         updateSidesTotalPrice();
     }
 
+    /**
+     * Updates the price of the bread bites
+     */
     public void updateBitesPrice(){
         if(breadBitesCheckBox.isSelected()){
             breadBitesPrice = Double.parseDouble(getBitesQuantity()) * 2;
@@ -266,6 +271,9 @@ public class SidesPage {
         updateSidesTotalPrice();
     }
 
+    /**
+     * Updates the price of the cookies
+     */
     public void updateCookiePrice(){
         if(cookieCheckBox.isSelected()){
             cookiePrice = Double.parseDouble(getCookieQuantity()) * 4;
