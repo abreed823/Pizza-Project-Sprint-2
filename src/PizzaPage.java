@@ -116,7 +116,6 @@ public class PizzaPage {
                 }else if(quantityComboBox.getSelectedIndex() == 0){
                     errorMessageLabel.setText("*Please select a quantity");
                 }else {
-                    String[]
                     Main.updateCartTotal((Double.parseDouble(getQuantity()))*(sizePrice + toppingsPrice));
                     resetPage();
                     Main.updateItemAddedLabel(true);

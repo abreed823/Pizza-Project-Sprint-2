@@ -98,6 +98,7 @@ public class SidesPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateSticksPrice();
+                updateSidesTotalPrice();
             }
         });
         breadBitesCheckBox.addActionListener(new ActionListener() {
@@ -109,6 +110,7 @@ public class SidesPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateBitesPrice();
+                updateSidesTotalPrice();
             }
         });
         cookieCheckBox.addActionListener(new ActionListener() {
@@ -120,6 +122,7 @@ public class SidesPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateCookiePrice();
+                updateSidesTotalPrice();
             }
         });
         sidesPanel.addComponentListener(new ComponentAdapter() {
@@ -142,9 +145,11 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(breadSticksCheckBox.isSelected()){
-                    updateSidesTotalPrice();
-                }
+//                if(breadSticksCheckBox.isSelected()){
+//                    updateSidesTotalPrice();
+//                }
+                updateSticksPrice();
+                updateSidesTotalPrice();
             }
         });
         breadBitesComboBox.addActionListener(new ActionListener() {
@@ -155,9 +160,11 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(breadBitesCheckBox.isSelected()) {
-                    updateSidesTotalPrice();
-                }
+//                if(breadBitesCheckBox.isSelected()) {
+//                    updateSidesTotalPrice();
+//                }
+                updateBitesPrice();
+                updateSidesTotalPrice();
             }
         });
         cookieComboBox.addActionListener(new ActionListener() {
@@ -168,9 +175,11 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(cookieCheckBox.isSelected()){
-                    updateSidesTotalPrice();
-                }
+//                if(cookieCheckBox.isSelected()){
+//                    updateSidesTotalPrice();
+//                }
+                updateCookiePrice();
+                updateSidesTotalPrice();
             }
         });
     }
@@ -240,16 +249,30 @@ public class SidesPage {
     }
 
     public void updateSticksPrice(){
-        //if(breadSticksCheckBox.isSelected()){}
-        breadSticksPrice = Double.parseDouble(getSticksQuantity()) * 4;
+        if(breadSticksCheckBox.isSelected()){
+            breadSticksPrice = Double.parseDouble(getSticksQuantity()) * 4;
+        }else{
+            breadSticksPrice = 0;
+        }
+        updateSidesTotalPrice();
     }
 
     public void updateBitesPrice(){
-        breadBitesPrice = Double.parseDouble(getBitesQuantity()) * 2;
+        if(breadBitesCheckBox.isSelected()){
+            breadBitesPrice = Double.parseDouble(getBitesQuantity()) * 2;
+        }else{
+            breadBitesPrice = 0;
+        }
+        updateSidesTotalPrice();
     }
 
     public void updateCookiePrice(){
-        cookiePrice = Double.parseDouble(getCookieQuantity()) * 4;
+        if(cookieCheckBox.isSelected()){
+            cookiePrice = Double.parseDouble(getCookieQuantity()) * 4;
+        }else{
+            cookiePrice = 0;
+        }
+        updateSidesTotalPrice();
     }
 
     /**
