@@ -13,6 +13,7 @@ public class ReceiptPage {
     private JPanel receiptPanel;
     private JButton printButton;
     private JButton exitButton;
+    private JTable receiptTable;
 
     /**
      * Constructor

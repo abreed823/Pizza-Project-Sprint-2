@@ -1,5 +1,6 @@
-//TODO -  update cart total on StartOrder, create image icon for logo, logout buttons reset application
-// create orders object, move instance variables in Main to constructor???,
+//TODO -  create image icon for logo, logout buttons reset application
+// create Orders object, move instance variables in Main to constructor???, update checkout page labels,
+// fix "select quantity" label on sides page
 
 import javax.swing.*;
 import java.awt.*;
@@ -118,9 +119,20 @@ public class Main {
         startOrder.updateItemAddedLabel(add);
     }
 
-    //TODO - figure out what this is for lol
-    public static String getCartTotal(){
-        return cartTotal.getCartTotal();
+    /**
+     * Returns the cart total as a String
+     * @return the cart total String
+     */
+    public static String getCartTotalString(){
+        return cartTotal.getCartTotalString();
+    }
+
+    /**
+     * Returns the cart total as a double
+     * @return the cart total double
+     */
+    public static double getCartTotalDouble(){
+        return cartTotal.getCartTotalDouble();
     }
 
     /**

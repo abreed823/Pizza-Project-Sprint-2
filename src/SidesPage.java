@@ -20,16 +20,26 @@ public class SidesPage {
     private JLabel itemTotalLabel;
     private JLabel cartSubtotalLabel;
     private JLabel errorMessageLabel;
+    private JComboBox breadSticksComboBox;
+    private JComboBox breadBitesComboBox;
+    private JComboBox cookieComboBox;
 
     private ArrayList<JCheckBox> checkBoxes;
 
     private double sidesPrice;
+    private double breadSticksPrice;
+    private double breadBitesPrice;
+    private double cookiePrice;
     private String totalPrice;
 
     /**
      * Constructor
      */
     public SidesPage() {
+
+        breadSticksPrice = 0;
+        breadBitesPrice = 0;
+        cookiePrice = 0;
 
         checkBoxes = new ArrayList<JCheckBox>();
         checkBoxes.add(breadBitesCheckBox);
@@ -87,7 +97,8 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateSidesPrice(breadSticksCheckBox, 4);
+                updateSticksPrice();
+                updateSidesTotalPrice();
             }
         });
         breadBitesCheckBox.addActionListener(new ActionListener() {
@@ -98,7 +109,8 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateSidesPrice(breadBitesCheckBox, 2);
+                updateBitesPrice();
+                updateSidesTotalPrice();
             }
         });
         cookieCheckBox.addActionListener(new ActionListener() {
@@ -109,7 +121,8 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateSidesPrice(cookieCheckBox, 4);
+                updateCookiePrice();
+                updateSidesTotalPrice();
             }
         });
         sidesPanel.addComponentListener(new ComponentAdapter() {
@@ -124,19 +137,59 @@ public class SidesPage {
                 updateCartSubtotalLabel();
             }
         });
+        breadSticksComboBox.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                if(breadSticksCheckBox.isSelected()){
+//                    updateSidesTotalPrice();
+//                }
+                updateSticksPrice();
+                updateSidesTotalPrice();
+            }
+        });
+        breadBitesComboBox.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                if(breadBitesCheckBox.isSelected()) {
+//                    updateSidesTotalPrice();
+//                }
+                updateBitesPrice();
+                updateSidesTotalPrice();
+            }
+        });
+        cookieComboBox.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                if(cookieCheckBox.isSelected()){
+//                    updateSidesTotalPrice();
+//                }
+                updateCookiePrice();
+                updateSidesTotalPrice();
+            }
+        });
     }
 
     /**
      * Updates the total price of the decides depending on if a checkbox is selected
-     * @param box the checkbox that was toggled
-     * @param itemPrice the price of the side item that was toggled
+     *
      */
-    public void updateSidesPrice(JCheckBox box, double itemPrice){
-        if(box.isSelected()){
-            sidesPrice += itemPrice;
-        }else{
-            sidesPrice -= itemPrice;
-        }
+    public void updateSidesTotalPrice(){
+        sidesPrice = breadSticksPrice + breadBitesPrice + cookiePrice;
         totalPrice = String.format("%.2f",sidesPrice);
         itemTotalLabel.setText("Item Total: $" + totalPrice);
     }
@@ -158,7 +211,76 @@ public class SidesPage {
      * Updates the cart subtotal label
      */
     public void updateCartSubtotalLabel(){
-        cartSubtotalLabel.setText(Main.getCartTotal());
+        cartSubtotalLabel.setText(Main.getCartTotalString());
+    }
+
+    /**
+     * Returns the drink quantity that the user selects
+     * @return A string for the quantity of the drink
+     */
+    public String getSticksQuantity(){
+        if(breadSticksComboBox.getSelectedIndex() == 0 || breadSticksComboBox.getSelectedIndex() == 1){
+            return "1";
+        }
+        return String.valueOf(breadSticksComboBox.getSelectedItem());
+    }
+
+    /**
+     * Returns the drink quantity that the user selects
+     * @return A string for the quantity of the drink
+     */
+    public String getBitesQuantity(){
+        if(breadBitesComboBox.getSelectedIndex() == 0 || breadBitesComboBox.getSelectedIndex() == 1){
+            return "1";
+        }
+        return String.valueOf(breadBitesComboBox.getSelectedItem());
+    }
+
+    /**
+     * Returns the drink quantity that the user selects
+     * @return A string for the quantity of the drink
+     */
+    public String getCookieQuantity(){
+        if(cookieComboBox.getSelectedIndex() == 0 || cookieComboBox.getSelectedIndex() == 1){
+            return "1";
+        }
+        return String.valueOf(cookieComboBox.getSelectedItem());
+    }
+
+    /**
+     * Updates the price of the bread sticks
+     */
+    public void updateSticksPrice(){
+        if(breadSticksCheckBox.isSelected()){
+            breadSticksPrice = Double.parseDouble(getSticksQuantity()) * 4;
+        }else{
+            breadSticksPrice = 0;
+        }
+        updateSidesTotalPrice();
+    }
+
+    /**
+     * Updates the price of the bread bites
+     */
+    public void updateBitesPrice(){
+        if(breadBitesCheckBox.isSelected()){
+            breadBitesPrice = Double.parseDouble(getBitesQuantity()) * 2;
+        }else{
+            breadBitesPrice = 0;
+        }
+        updateSidesTotalPrice();
+    }
+
+    /**
+     * Updates the price of the cookies
+     */
+    public void updateCookiePrice(){
+        if(cookieCheckBox.isSelected()){
+            cookiePrice = Double.parseDouble(getCookieQuantity()) * 4;
+        }else{
+            cookiePrice = 0;
+        }
+        updateSidesTotalPrice();
     }
 
     /**
@@ -171,8 +293,13 @@ public class SidesPage {
 
         sidesPrice = 0;
         itemTotalLabel.setText("Item Total: $0.00");
-
         errorMessageLabel.setText("*Required");
+        breadSticksComboBox.setSelectedIndex(0);
+        breadBitesComboBox.setSelectedIndex(0);
+        cookieComboBox.setSelectedIndex(0);
+        breadSticksPrice = 0;
+        breadBitesPrice = 0;
+        cookiePrice = 0;
     }
 
     /**

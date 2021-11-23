@@ -1,12 +1,11 @@
-import javax.swing.*;
-
+import java.util.ArrayList;
 /**
  * Updates the total for the user's car
  */
 public class CartTotal {
+    public static ArrayList<OrderItem> items = new ArrayList<OrderItem>();
     private double cartTotal;
     private String totalPriceString;
-    //private JLabel cartTotalLabel;
 
     /**
      * Constructor
@@ -14,15 +13,22 @@ public class CartTotal {
     CartTotal(){
         cartTotal = 0;
         totalPriceString = "Cart Subtotal: $" + String.format("%.2f", cartTotal);
-        //cartTotalLabel.setText("Subtotal: $" + totalPriceString);
     }
 
     /**
-     * Returns the cart total label
-     * @return the cart total label
+     * Returns the cart total as a String
+     * @return the cart total String
      */
-    public String getCartTotal(){
+    public String getCartTotalString(){
         return totalPriceString;
+    }
+
+    /**
+     * Returns the cart total as a double
+     * @return the cart total double
+     */
+    public double getCartTotalDouble(){
+        return cartTotal;
     }
 
     /**

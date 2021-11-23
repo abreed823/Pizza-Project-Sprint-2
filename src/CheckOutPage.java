@@ -7,6 +7,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class CheckOutPage {
     private JPanel checkOutPanel;
@@ -16,11 +18,17 @@ public class CheckOutPage {
     private JRadioButton checkRadioButton;
     private JButton backButton;
     private JButton continueButton;
+    private JLabel errorMessageLabel;
+    private JLabel cartSubtotalLabel;
+    private JLabel taxLabel;
+    private JLabel finalTotalLabel;
 
     private ButtonGroup paymentMethodButtonGroup;
 
     private boolean payWithCard;
     private boolean paymentMethodSelected;
+
+    private double tax;
 
     /**
      * Constructor
@@ -68,6 +76,8 @@ public class CheckOutPage {
                 }else if(!payWithCard && paymentMethodSelected){
                     resetPage();
                     Main.showCardLayout("payCash");
+                }else if(!paymentMethodSelected){
+                    errorMessageLabel.setText("Please select a payment method.");
                 }
             }
         });
@@ -97,6 +107,22 @@ public class CheckOutPage {
         };
         cashRadioButton.addActionListener(cashCheckListener);
         checkRadioButton.addActionListener(cashCheckListener);
+
+        checkOutPanel.addComponentListener(new ComponentAdapter() {
+            /**
+             * Invoked when the component has been made visible.
+             *
+             * @param e
+             */
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                tax = Main.getCartTotalDouble() * 0.04;
+                cartSubtotalLabel.setText(Main.getCartTotalString());
+                taxLabel.setText("Tax: $" + String.format("%.2f", tax));
+                finalTotalLabel.setText("Total: $" + String.format("%.2f", Main.getCartTotalDouble() + tax));
+            }
+        });
     }
 
     /**
@@ -105,6 +131,7 @@ public class CheckOutPage {
     public void resetPage(){
         paymentMethodButtonGroup.clearSelection();
         paymentMethodSelected = false;
+        errorMessageLabel.setText("");
     }
 
     /**

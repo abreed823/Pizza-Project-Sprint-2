@@ -7,6 +7,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class StartOrderPage {
     private JPanel startOrderPanel;
@@ -17,7 +19,7 @@ public class StartOrderPage {
     private JButton viewCartButton;
     private JButton backButton;
     private JLabel itemAddedLabel;
-    private JLabel cartTotalLabel;
+    private JLabel cartSubtotalLabel;
 
     /**
      * Constructor
@@ -92,6 +94,18 @@ public class StartOrderPage {
                 Main.showCardLayout("viewCart");
             }
         });
+        startOrderPanel.addComponentListener(new ComponentAdapter() {
+            /**
+             * Invoked when the component has been made visible.
+             *
+             * @param e
+             */
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                updateCartSubtotalLabel();
+            }
+        });
     }
 
     /**
@@ -104,6 +118,13 @@ public class StartOrderPage {
         }else{
             itemAddedLabel.setText("");
         }
+    }
+
+    /**
+     * Updates the cart subtotal label
+     */
+    public void updateCartSubtotalLabel(){
+        cartSubtotalLabel.setText(Main.getCartTotalString());
     }
 
     /**

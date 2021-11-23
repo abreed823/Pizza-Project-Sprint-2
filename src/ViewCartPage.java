@@ -5,6 +5,7 @@
  */
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,6 +14,7 @@ public class ViewCartPage {
     private JPanel viewCartPanel;
     private JButton continueButton;
     private JButton backButton;
+    private JTable viewCartTable;
 
     /**
      * Constructor
@@ -53,6 +55,7 @@ public class ViewCartPage {
         });
     }
 
+
     /**
      * Returns the JPanel to the Main class
      * @return the panel to return
@@ -60,4 +63,5 @@ public class ViewCartPage {
     public JPanel getPanel(){
         return viewCartPanel;
     }
+    
 }
