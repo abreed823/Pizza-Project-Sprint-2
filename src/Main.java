@@ -1,6 +1,6 @@
 //TODO -  create image icon for logo, logout buttons reset application
-// create Orders object, move instance variables in Main to constructor???, update checkout page labels,
-// fix "select quantity" label on sides page
+// move instance variables in Main to constructor???
+// fix "select quantity" label on sides page, reset cart total with logout button
 
 import javax.swing.*;
 import java.awt.*;
@@ -141,6 +141,10 @@ public class Main {
      */
     public static void updateCartTotal(double price){
         cartTotal.updateCartTotal(price);
+    }
+
+    public static void resetCartTotal(){
+        cartTotal.resetCartTotal();
     }
 
     public static void main(String[] args){
