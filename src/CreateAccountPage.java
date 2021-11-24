@@ -67,7 +67,7 @@ public class CreateAccountPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("")
-                || phoneNumberTextField.getText().equals("") || addressTextField.getText().equals("")
+                || phoneNumberTextField.getText().contains("#") || addressTextField.getText().equals("")
                 || String.valueOf(passwordField.getPassword()).equals("")
                 || String.valueOf(confirmPasswordField.getPassword()).equals("")){
                     errorMessageLabel.setText("Please fill out all text fields.");

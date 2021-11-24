@@ -43,9 +43,7 @@ public class LoginPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                phoneNumberField.setText("");
-                passwordField.setText("");
-                errorMessageLabel.setText("");
+                resetPage();
                 Main.showCardLayout("welcome");
             }
         });
@@ -62,13 +60,12 @@ public class LoginPage {
 
                 if(loginInfo.containsKey(userID)){
                     if(loginInfo.get(userID).equals(password)){
-                        phoneNumberField.setText("");
-                        passwordField.setText("");
+                        resetPage();
                         Main.showCardLayout("customerWelcome");
                     }else{
                         passwordIncorrect();
                     }
-                }else if(phoneNumberField.getText().equals("") || String.valueOf(passwordField.getPassword()).equals("")){
+                }else if(phoneNumberField.getText().contains("#") || String.valueOf(passwordField.getPassword()).equals("")){
                     errorMessageLabel.setText("Please enter both your username and your password.");
                 }else{
                     passwordIncorrect();
@@ -82,6 +79,12 @@ public class LoginPage {
      */
     public void passwordIncorrect(){
         errorMessageLabel.setText("Your username and/or password is incorrect.");
+    }
+
+    public void resetPage(){
+        phoneNumberField.setText("");
+        passwordField.setText("");
+        errorMessageLabel.setText("");
     }
 
     /**

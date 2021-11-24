@@ -95,8 +95,8 @@ public class PayCardPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(nameTextField.getText().equals("") || cardNumberTextField.getText().equals("") ||
-                expDateTextField.getText().equals("") || cvvTextField.getText().equals("")){
+                if(nameTextField.getText().equals("") || cardNumberTextField.getText().contains("#") ||
+                expDateTextField.getText().contains("#") || cvvTextField.getText().contains("#")){
                     errorMessageLabel.setText("*Please fill out all required fields.");
                 }else{
                     resetPage();
