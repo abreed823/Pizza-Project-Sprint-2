@@ -1,9 +1,3 @@
-/**
- * The functionality and display for the login page
- *
- * @author Team 2
- */
-
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
@@ -11,6 +5,11 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.HashMap;
 
+/**
+ * The functionality and display for the login page
+ *
+ * @author Team 2
+ */
 public class LoginPage {
     private JPanel logInPanel;
     private JFormattedTextField phoneNumberField;
@@ -18,13 +17,14 @@ public class LoginPage {
     private JButton logInButton;
     private JPasswordField passwordField;
     private JLabel errorMessageLabel;
-    private HashMap<String, String> loginInfo = new HashMap<String,String>();
+    private HashMap<String, String> loginInfo;
 
     /**
      * Constructor
      * @param loginInfoOriginal The HashMap for the login info
      */
     public LoginPage(HashMap<String, String> loginInfoOriginal) {
+        loginInfo = new HashMap<String,String>();
         loginInfo = loginInfoOriginal;
         MaskFormatter phoneNumFormat;
         try {

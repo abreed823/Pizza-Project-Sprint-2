@@ -1,12 +1,11 @@
+import java.util.HashMap;
+
 /**
  * Stores and adds valid combinations of user ids and passwords
  *
  * @author Team 2
  * @version 1.1
  */
-
-import java.util.HashMap;
-
 public class IDsandPasswords {
     HashMap<String, String> loginInfo = new HashMap<String, String>();
 

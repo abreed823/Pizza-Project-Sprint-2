@@ -1,15 +1,14 @@
-/**
- * The functionality and display for the Pay With Card page
- *
- * @author Team 2
- */
-
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 
+/**
+ * The functionality and display for the Pay With Card page
+ *
+ * @author Team 2
+ */
 public class PayCardPage {
     private JButton logOutButton;
     private JPanel payCardPanel;

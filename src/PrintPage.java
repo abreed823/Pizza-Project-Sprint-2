@@ -1,13 +1,12 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  * The functionality and display for the Print Receipt page
  *
  * @author Team 2
  */
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class PrintPage {
     private JPanel printPanel;
     private JButton logOutButton;

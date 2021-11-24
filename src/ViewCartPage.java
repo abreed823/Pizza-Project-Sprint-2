@@ -1,13 +1,13 @@
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  * The functionality and display for the View Cart page
  *
  * @author Team 2
  */
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ViewCartPage {
     private JButton logOutButton;

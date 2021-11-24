@@ -1,9 +1,3 @@
-/**
- * The functionality and display for the Pizza Ordering page
- *
- * @author Team 2
- */
-//TODO fix issue - update subtotal labels whenever a page is opened, not just when you add to cart
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +5,11 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
+/**
+ * The functionality and display for the Pizza Ordering page
+ *
+ * @author Team 2
+ */
 public class PizzaPage {
     private JButton logOutButton;
     private JPanel pizzaPanel;

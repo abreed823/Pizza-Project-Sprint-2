@@ -1,15 +1,14 @@
-/**
- * The functionality and display for the drink ordering page
- *
- * @author Team 2
- */
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+/**
+ * The functionality and display for the drink ordering page
+ *
+ * @author Team 2
+ */
 public class DrinksPage {
     private JPanel drinksPanel;
     private JButton logOutButton;
@@ -29,7 +28,7 @@ public class DrinksPage {
     private JLabel itemTotalLabel;
     private JLabel cartSubtotalLabel;
     private JLabel errorMessageLabel;
-    private JComboBox quantityComboBox;
+    private JComboBox<String> quantityComboBox;
 
     private ButtonGroup drinksButtonGroup;
     private ButtonGroup sizesButtonGroup;

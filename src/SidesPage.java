@@ -1,7 +1,3 @@
-/**
- * The functionality and display for the Sides Selection page
- */
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +5,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
+/**
+ * The functionality and display for the Sides Selection page
+ */
 public class SidesPage {
     private JButton logOutButton;
     private JPanel sidesPanel;
