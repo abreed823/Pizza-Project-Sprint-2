@@ -34,7 +34,7 @@ public class PizzaPage {
     private JLabel itemTotalLabel;
     private JLabel cartSubtotalLabel;
     private JLabel errorMessageLabel;
-    private JComboBox quantityComboBox;
+    private JComboBox<String> quantityComboBox;
 
     private ButtonGroup sizesButtonGroup;
     private ButtonGroup crustButtonGroup;
@@ -49,16 +49,21 @@ public class PizzaPage {
     private double pricePerTopping;
     private String itemTotalPrice;
 
-    private boolean sizeSelected;
-    private boolean crustSelected;
+    private boolean IsSizeSelected;
+    private boolean isCrustSelected;
+
+    private StringBuilder itemDescription;
+    private String selectedSize;
+    private String selectedCrust;
+    private ArrayList<String> selectedToppings;
+    private String[] pizzaRow;
 
     /**
      * Constructor
      */
     public PizzaPage() {
-
-        sizeSelected = false;
-        crustSelected = false;
+        IsSizeSelected = false;
+        isCrustSelected = false;
 
         boxesToDisable = new ArrayList<JCheckBox>();
         addCheckBoxes();
@@ -76,6 +81,12 @@ public class PizzaPage {
        crustButtonGroup.add(originalRadioButton);
        crustButtonGroup.add(thinRadioButton);
        crustButtonGroup.add(panRadioButton);
+
+       itemDescription = new StringBuilder();
+       selectedSize = "";
+       selectedCrust = "";
+       selectedToppings = new ArrayList<String>();
+       pizzaRow = new String[4];
 
         logOutButton.addActionListener(new ActionListener() {
             /**
@@ -110,14 +121,16 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!(sizeSelected && crustSelected)){
+                if(!(IsSizeSelected && isCrustSelected)){
                     errorMessageLabel.setText("*Please make all required selections.");
                 }else if(quantityComboBox.getSelectedIndex() == 0){
                     errorMessageLabel.setText("*Please select a quantity");
                 }else {
                     Main.updateCartTotal((Double.parseDouble(getQuantity()))*(sizePrice + toppingsPrice));
-                    resetPage();
                     Main.updateItemAddedLabel(true);
+                    buildDescriptionString();
+                    addItemsToTables(String.valueOf(itemDescription));
+                    resetPage();
                     Main.showCardLayout("startOrder");
                 }
             }
@@ -131,7 +144,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                toggleCheckBox(pepperoniCheckBox);
+                toggleCheckBox(pepperoniCheckBox, "Pepperoni");
             }
         });
         hamCheckBox.addActionListener(new ActionListener() {
@@ -142,7 +155,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                toggleCheckBox(hamCheckBox);
+                toggleCheckBox(hamCheckBox, "Ham");
             }
         });
         greenPepperCheckBox.addActionListener(new ActionListener() {
@@ -153,7 +166,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                toggleCheckBox(greenPepperCheckBox);
+                toggleCheckBox(greenPepperCheckBox, "Green Peppers");
             }
         });
         onionCheckBox.addActionListener(new ActionListener() {
@@ -164,7 +177,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                toggleCheckBox(onionCheckBox);
+                toggleCheckBox(onionCheckBox, "Onion");
             }
         });
         sausageCheckBox.addActionListener(new ActionListener() {
@@ -175,7 +188,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                toggleCheckBox(sausageCheckBox);
+                toggleCheckBox(sausageCheckBox, "Sausage");
             }
         });
         tomatoCheckBox.addActionListener(new ActionListener() {
@@ -186,7 +199,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                toggleCheckBox(tomatoCheckBox);
+                toggleCheckBox(tomatoCheckBox, "Tomato");
             }
         });
         mushroomCheckBox.addActionListener(new ActionListener() {
@@ -197,7 +210,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                toggleCheckBox(mushroomCheckBox);
+                toggleCheckBox(mushroomCheckBox, "Mushroom");
             }
         });
         pineappleCheckBox.addActionListener(new ActionListener() {
@@ -208,7 +221,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                toggleCheckBox(pineappleCheckBox);
+                toggleCheckBox(pineappleCheckBox, "Pineapple");
             }
         });
         extraCheeseCheckBox.addActionListener(new ActionListener() {
@@ -219,7 +232,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                toggleCheckBox(extraCheeseCheckBox);
+                toggleCheckBox(extraCheeseCheckBox, "Extra Cheese");
             }
         });
         smallRadioButton.addActionListener(new ActionListener() {
@@ -230,6 +243,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                selectedSize = "Small";
                 pricePerTopping = 0.5;
                 updateSizePrice(4.00);
             }
@@ -242,6 +256,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                selectedSize = "Medium";
                 pricePerTopping = 0.75;
                 updateSizePrice(6.00);
             }
@@ -254,6 +269,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                selectedSize = "Large";
                 pricePerTopping = 1;
                 updateSizePrice(8.00);
             }
@@ -266,6 +282,7 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                selectedSize = "Extra Large";
                 pricePerTopping = 1.25;
                 updateSizePrice(10.00);
             }
@@ -278,7 +295,14 @@ public class PizzaPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                crustSelected = true;
+                isCrustSelected = true;
+                if(originalRadioButton.isSelected()){
+                    selectedCrust = "Original Crust";
+                }else if(panRadioButton.isSelected()){
+                    selectedCrust = "Pan Crust";
+                }else if(thinRadioButton.isSelected()){
+                    selectedCrust = "Thin Crust";
+                }
             }
         };
         originalRadioButton.addActionListener(listener);
@@ -329,12 +353,14 @@ public class PizzaPage {
      * Updates the boxesToDisable ArrayList whenever a checkbox is toggled
      * @param box the box that is toggled
      */
-    public void toggleCheckBox(JCheckBox box){
+    public void toggleCheckBox(JCheckBox box, String toppingName){
         if(box.isSelected()){
             boxesToDisable.remove(box);
+            selectedToppings.add(toppingName);
             changeToppingsCounter(true);
         }else{
             boxesToDisable.add(box);
+            selectedToppings.remove(toppingName);
             changeToppingsCounter(false);
         }
     }
@@ -382,7 +408,7 @@ public class PizzaPage {
      * @param sizePrice the prize of the selected pizza size
      */
     public void updateSizePrice(double sizePrice){
-        sizeSelected = true;
+        IsSizeSelected = true;
         this.sizePrice = sizePrice;
         updateToppingsPrice(pricePerTopping, toppingsCounter);
     }
@@ -426,6 +452,35 @@ public class PizzaPage {
     }
 
     /**
+     * Creates the description of the pizza that will be added to the view cart and receipt tables
+     */
+    public void buildDescriptionString(){
+        itemDescription.append(selectedSize);
+        itemDescription.append(", ");
+        itemDescription.append(selectedCrust);
+
+        if(toppingsCounter > 0){
+            for(String topping: selectedToppings){
+                itemDescription.append(", ");
+                itemDescription.append(topping);
+            }
+        }
+    }
+
+    /**
+     * Adds the new item to the tables of the view cart page anf the receipt page
+     * @param itemDescription the description of the item that is being added
+     */
+    public void addItemsToTables(String itemDescription){
+        pizzaRow[0] = "Pizza";
+        pizzaRow[1] = itemDescription;
+        pizzaRow[2] = String.valueOf(quantityComboBox.getSelectedItem());
+        pizzaRow[3] = "$" + itemTotalPrice;
+
+        Main.addTableRow(pizzaRow);
+    }
+
+    /**
      * Resets the page to its original state
      */
     public void resetPage(){
@@ -443,8 +498,8 @@ public class PizzaPage {
         quantityComboBox.setSelectedIndex(0);
         itemTotalLabel.setText("Item Total: $0.00");
         errorMessageLabel.setText("*Required");
-        sizeSelected = false;
-        crustSelected = false;
+        IsSizeSelected = false;
+        isCrustSelected = false;
     }
 
     /**

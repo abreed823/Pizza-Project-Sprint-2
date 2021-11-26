@@ -112,6 +112,7 @@
               <component id="e46c5" class="javax.swing.JTable" binding="viewCartTable">
                 <constraints/>
                 <properties>
+                  <enabled value="false"/>
                   <font size="18"/>
                 </properties>
               </component>
