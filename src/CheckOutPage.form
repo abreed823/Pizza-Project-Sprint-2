@@ -134,7 +134,7 @@
                 </constraints>
                 <properties>
                   <font size="24"/>
-                  <text value="Total"/>
+                  <text value="Total:"/>
                 </properties>
               </component>
               <component id="686e7" class="javax.swing.JLabel" binding="cartSubtotalLabel">
