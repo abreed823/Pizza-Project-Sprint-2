@@ -1,7 +1,10 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  * The functionality and display for the View Cart page
@@ -15,7 +18,12 @@ public class ViewCartPage {
     private JButton continueButton;
     private JButton backButton;
     private JTable viewCartTable;
+    private JLabel cartSubtotalLabel;
+    private JLabel taxLabel;
+    private JLabel finalTotalLabel;
     private DefaultTableModel tableModel;
+
+    private double tax;
 
     /**
      * Constructor
@@ -41,6 +49,7 @@ public class ViewCartPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                Main.updateItemAddedLabel(false);
                 Main.showCardLayout("startOrder");
             }
         });
@@ -55,6 +64,21 @@ public class ViewCartPage {
                 Main.showCardLayout("checkOut");
             }
         });
+        viewCartPanel.addComponentListener(new ComponentAdapter() {
+            /**
+             * Invoked when the component has been made visible.
+             *
+             * @param e
+             */
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                tax = Main.getCartTotalDouble() * 0.04;
+                cartSubtotalLabel.setText(Main.getCartTotalString());
+                taxLabel.setText("Tax: $" + String.format("%.2f", tax));
+                finalTotalLabel.setText("Total: $" + String.format("%.2f", Main.getCartTotalDouble() + tax));
+            }
+        });
     }
 
     /**
@@ -66,6 +90,20 @@ public class ViewCartPage {
                 new String[]{"Item Type", "Item Description", "Quantity", "Price"}
         );
         viewCartTable.setModel(tableModel);
+
+        TableColumnModel columnModel = viewCartTable.getColumnModel();
+        columnModel.getColumn(0).setMinWidth(100);
+        columnModel.getColumn(0).setMaxWidth(100);
+        columnModel.getColumn(0).setPreferredWidth(100);
+        columnModel.getColumn(1).setMinWidth(750);
+        columnModel.getColumn(1).setMaxWidth(750);
+        columnModel.getColumn(1).setPreferredWidth(750);
+        columnModel.getColumn(2).setMinWidth(100);
+        columnModel.getColumn(2).setMaxWidth(100);
+        columnModel.getColumn(2).setPreferredWidth(100);
+        columnModel.getColumn(3).setMinWidth(100);
+        columnModel.getColumn(3).setMaxWidth(100);
+        columnModel.getColumn(3).setPreferredWidth(100);
     }
 
     /**

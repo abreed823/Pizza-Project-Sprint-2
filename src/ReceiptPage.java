@@ -1,7 +1,10 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  * The functionality and display for the Receipt page
@@ -14,7 +17,12 @@ public class ReceiptPage {
     private JButton printButton;
     private JButton exitButton;
     private JTable receiptTable;
+    private JLabel cartSubtotalLabel;
+    private JLabel taxLabel;
+    private JLabel finalTotalLabel;
     private DefaultTableModel tableModel;
+
+    private double tax;
 
     /**
      * Constructor
@@ -43,6 +51,21 @@ public class ReceiptPage {
                 Main.showCardLayout("print");
             }
         });
+        receiptPanel.addComponentListener(new ComponentAdapter() {
+            /**
+             * Invoked when the component has been made visible.
+             *
+             * @param e
+             */
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                tax = Main.getCartTotalDouble() * 0.04;
+                cartSubtotalLabel.setText(Main.getCartTotalString());
+                taxLabel.setText("Tax: $" + String.format("%.2f", tax));
+                finalTotalLabel.setText("Total: $" + String.format("%.2f", Main.getCartTotalDouble() + tax));
+            }
+        });
     }
 
     /**
@@ -54,6 +77,20 @@ public class ReceiptPage {
                 new String[]{"Item Type", "Item Description", "Quantity", "Price"}
         );
         receiptTable.setModel(tableModel);
+
+        TableColumnModel columnModel = receiptTable.getColumnModel();
+        columnModel.getColumn(0).setMinWidth(100);
+        columnModel.getColumn(0).setMaxWidth(100);
+        columnModel.getColumn(0).setPreferredWidth(100);
+        columnModel.getColumn(1).setMinWidth(750);
+        columnModel.getColumn(1).setMaxWidth(750);
+        columnModel.getColumn(1).setPreferredWidth(750);
+        columnModel.getColumn(2).setMinWidth(100);
+        columnModel.getColumn(2).setMaxWidth(100);
+        columnModel.getColumn(2).setPreferredWidth(100);
+        columnModel.getColumn(3).setMinWidth(100);
+        columnModel.getColumn(3).setMaxWidth(100);
+        columnModel.getColumn(3).setPreferredWidth(100);
     }
 
     /**

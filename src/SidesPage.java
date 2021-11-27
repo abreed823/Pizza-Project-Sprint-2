@@ -50,6 +50,9 @@ public class SidesPage {
         checkBoxes.add(cookieCheckBox);
 
         quantitiesToCheck = new ArrayList<JComboBox<String>>();
+        breadSticksComboBox.setEnabled(false);
+        breadBitesComboBox.setEnabled(false);
+        cookieComboBox.setEnabled(false);
 
         itemDescription = new StringBuilder();
         sidesRow = new String[4];
@@ -111,7 +114,7 @@ public class SidesPage {
             public void actionPerformed(ActionEvent e) {
                 updateSticksPrice();
                 updateSidesTotalPrice();
-                updateQuantityList(breadSticksCheckBox, breadSticksComboBox);
+                updateCheckedBoxesList(breadSticksCheckBox, breadSticksComboBox);
             }
         });
         breadBitesCheckBox.addActionListener(new ActionListener() {
@@ -124,7 +127,7 @@ public class SidesPage {
             public void actionPerformed(ActionEvent e) {
                 updateBitesPrice();
                 updateSidesTotalPrice();
-                updateQuantityList(breadBitesCheckBox, breadBitesComboBox);
+                updateCheckedBoxesList(breadBitesCheckBox, breadBitesComboBox);
             }
         });
         cookieCheckBox.addActionListener(new ActionListener() {
@@ -137,7 +140,7 @@ public class SidesPage {
             public void actionPerformed(ActionEvent e) {
                 updateCookiePrice();
                 updateSidesTotalPrice();
-                updateQuantityList(cookieCheckBox, cookieComboBox);
+                updateCheckedBoxesList(cookieCheckBox, cookieComboBox);
             }
         });
         sidesPanel.addComponentListener(new ComponentAdapter() {
@@ -258,11 +261,14 @@ public class SidesPage {
      * @param sidesBox the checkbox that is/not selected
      * @param quantityBox the combo box to add/remove from the ArrayList
      */
-    public void updateQuantityList(JCheckBox sidesBox, JComboBox<String> quantityBox){
+    public void updateCheckedBoxesList(JCheckBox sidesBox, JComboBox<String> quantityBox){
         if(sidesBox.isSelected()){
             quantitiesToCheck.add(quantityBox);
+            quantityBox.setEnabled(true);
         }else{
             quantitiesToCheck.remove(quantityBox);
+            quantityBox.setSelectedIndex(0);
+            quantityBox.setEnabled(false);
         }
     }
 
@@ -318,9 +324,9 @@ public class SidesPage {
     public void createTableRow(){
         for(JComboBox<String> item: quantitiesToCheck){
             if(item.equals(breadSticksComboBox)){
-                addItemsToTables("Bread Sticks", String.valueOf(item.getSelectedItem()), breadBitesPrice);
+                addItemsToTables("Bread Sticks", String.valueOf(item.getSelectedItem()), breadSticksPrice);
             }else if(item.equals(breadBitesComboBox)){
-                addItemsToTables("Bread Bites", String.valueOf(item.getSelectedItem()), breadSticksPrice);
+                addItemsToTables("Bread Bites", String.valueOf(item.getSelectedItem()), breadBitesPrice);
             }else if(item.equals(cookieComboBox)){
                 addItemsToTables("Chocolate Chip Cookie", String.valueOf(item.getSelectedItem()), cookiePrice);
             }
@@ -357,6 +363,11 @@ public class SidesPage {
         breadSticksPrice = 0;
         breadBitesPrice = 0;
         cookiePrice = 0;
+        quantitiesToCheck.clear();
+        itemDescription.setLength(0);
+        breadSticksComboBox.setEnabled(false);
+        breadBitesComboBox.setEnabled(false);
+        cookieComboBox.setEnabled(false);
     }
 
     /**
