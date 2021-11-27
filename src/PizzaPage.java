@@ -500,6 +500,8 @@ public class PizzaPage {
         errorMessageLabel.setText("*Required");
         IsSizeSelected = false;
         isCrustSelected = false;
+
+        itemDescription.setLength(0);
     }
 
     /**

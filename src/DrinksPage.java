@@ -258,6 +258,7 @@ public class DrinksPage {
         isSizeSelected = false;
         isDrinkSelected = false;
         errorMessageLabel.setText("*Required");
+        itemDescription.setLength(0);
     }
 
     /**
