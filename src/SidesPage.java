@@ -32,6 +32,9 @@ public class SidesPage {
     private double cookiePrice;
     private String totalPrice;
 
+    private StringBuilder itemDescription;
+    private String[] sidesRow;
+
     /**
      * Constructor
      */
@@ -47,6 +50,10 @@ public class SidesPage {
         checkBoxes.add(cookieCheckBox);
 
         quantitiesToCheck = new ArrayList<JComboBox<String>>();
+
+        itemDescription = new StringBuilder();
+        sidesRow = new String[4];
+
 
         cancelButton.addActionListener(new ActionListener() {
             /**
@@ -75,8 +82,9 @@ public class SidesPage {
                     errorMessageLabel.setText("*Please select a quantity.");
                 }else{
                     Main.updateCartTotal(sidesPrice);
-                    resetPage();
                     Main.updateItemAddedLabel(true);
+                    createTableRow();
+                    resetPage();
                     Main.showCardLayout("startOrder");
                 }
             }
@@ -152,9 +160,6 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-//                if(breadSticksCheckBox.isSelected()){
-//                    updateSidesTotalPrice();
-//                }
                 updateSticksPrice();
                 updateSidesTotalPrice();
             }
@@ -167,9 +172,6 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-//                if(breadBitesCheckBox.isSelected()) {
-//                    updateSidesTotalPrice();
-//                }
                 updateBitesPrice();
                 updateSidesTotalPrice();
             }
@@ -182,9 +184,6 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-//                if(cookieCheckBox.isSelected()){
-//                    updateSidesTotalPrice();
-//                }
                 updateCookiePrice();
                 updateSidesTotalPrice();
             }
@@ -314,6 +313,31 @@ public class SidesPage {
             cookiePrice = 0;
         }
         updateSidesTotalPrice();
+    }
+
+    public void createTableRow(){
+        for(JComboBox<String> item: quantitiesToCheck){
+            if(item.equals(breadSticksComboBox)){
+                addItemsToTables("Bread Sticks", String.valueOf(item.getSelectedItem()), breadBitesPrice);
+            }else if(item.equals(breadBitesComboBox)){
+                addItemsToTables("Bread Bites", String.valueOf(item.getSelectedItem()), breadSticksPrice);
+            }else if(item.equals(cookieComboBox)){
+                addItemsToTables("Chocolate Chip Cookie", String.valueOf(item.getSelectedItem()), cookiePrice);
+            }
+        }
+    }
+
+    /**
+     * Adds the new item to the tables of the view cart page anf the receipt page
+     * @param item the description of the item that is being added
+     */
+    public void addItemsToTables(String item, String quantity, double price){
+        sidesRow[0] = "Side";
+        sidesRow[1] = item;
+        sidesRow[2] = quantity;
+        sidesRow[3] = "$" + String.valueOf(price) + "0";
+
+        Main.addTableRow(sidesRow);
     }
 
     /**

@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ContainerAdapter;
 import java.text.ParseException;
 
 /**
@@ -87,6 +88,17 @@ public class CreateAccountPage {
 
                     Main.showCardLayout("customerWelcome");
                 }
+            }
+        });
+        phoneNumberTextField.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                phoneNumberTextField.setCaretPosition(0);
             }
         });
     }

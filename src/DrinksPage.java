@@ -13,7 +13,7 @@ public class DrinksPage {
     private JPanel drinksPanel;
     private JButton logOutButton;
     private JRadioButton pepsiRadioButton;
-    private JRadioButton orangeRadioButton1;
+    private JRadioButton orangeRadioButton;
     private JRadioButton rootBeerRadioButton;
     private JRadioButton dietRootBeerRadioButton;
     private JRadioButton dietOrangeRadioButton;
@@ -33,8 +33,13 @@ public class DrinksPage {
     private ButtonGroup drinksButtonGroup;
     private ButtonGroup sizesButtonGroup;
 
-    private boolean sizeSelected;
-    private boolean drinkSelected;
+    private boolean isSizeSelected;
+    private boolean isDrinkSelected;
+
+    private StringBuilder itemDescription;
+    private String selectedSize;
+    private String selectedDrink;
+    private String[] drinkRow;
 
     /**
      * Constructor
@@ -44,7 +49,7 @@ public class DrinksPage {
         drinksButtonGroup = new ButtonGroup();
         drinksButtonGroup.add(pepsiRadioButton);
         drinksButtonGroup.add(dietPepsiRadioButton);
-        drinksButtonGroup.add(orangeRadioButton1);
+        drinksButtonGroup.add(orangeRadioButton);
         drinksButtonGroup.add(dietOrangeRadioButton);
         drinksButtonGroup.add(rootBeerRadioButton);
         drinksButtonGroup.add(dietRootBeerRadioButton);
@@ -55,6 +60,11 @@ public class DrinksPage {
         sizesButtonGroup.add(smallRadioButton);
         sizesButtonGroup.add(mediumRadioButton);
         sizesButtonGroup.add(largeRadioButton);
+
+        itemDescription = new StringBuilder();
+        drinkRow = new String[4];
+        selectedSize = "";
+        selectedDrink = "";
 
         logOutButton.addActionListener(new ActionListener() {
             /**
@@ -89,14 +99,16 @@ public class DrinksPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!(sizeSelected && drinkSelected)){
+                if(!(isSizeSelected && isDrinkSelected)){
                     errorMessageLabel.setText("*Please make all required selections.");
                 }else if(quantityComboBox.getSelectedIndex() == 0){
                     errorMessageLabel.setText("*Please select a quantity");
                 }else {
                     Main.updateCartTotal(Double.parseDouble(getQuantity()));
-                    resetPage();
                     Main.updateItemAddedLabel(true);
+                    buildDescriptionString();
+                    addItemsToTables(String.valueOf(itemDescription));
+                    resetPage();
                     Main.showCardLayout("startOrder");
                 }
             }
@@ -109,7 +121,15 @@ public class DrinksPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                sizeSelected = true;
+                if(smallRadioButton.isSelected()){
+                    selectedSize = "Small ";
+                }else if(mediumRadioButton.isSelected()){
+                    selectedSize = "Medium ";
+                }else if(largeRadioButton.isSelected()){
+                    selectedSize = "Large ";
+                }
+                
+                isSizeSelected = true;
                 updateItemTotalLabel(Integer.parseInt(getQuantity()));
             }
         };
@@ -124,12 +144,30 @@ public class DrinksPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                drinkSelected = true;
+                if(pepsiRadioButton.isSelected()){
+                    selectedDrink = "Pepsi";
+                }else if(orangeRadioButton.isSelected()){
+                    selectedDrink = "Orange";
+                }else if(rootBeerRadioButton.isSelected()){
+                    selectedDrink = "Root Beer";
+                }else if(dietRootBeerRadioButton.isSelected()){
+                    selectedDrink = "Diet Root Beer";
+                }else if(dietOrangeRadioButton.isSelected()){
+                    selectedDrink = "Diet Orange";
+                }else if(dietPepsiRadioButton.isSelected()){
+                    selectedDrink = "Diet Pepsi";
+                }else if(sierraMistRadioButton.isSelected()){
+                    selectedDrink = "Sierra Mist";
+                }else if(lemonadeRadioButton.isSelected()){
+                    selectedDrink = "Lemonade";
+                }
+                
+                isDrinkSelected = true;
                 updateItemTotalLabel(Integer.parseInt(getQuantity()));
             }
         };
         pepsiRadioButton.addActionListener(drinkButtonListener);
-        orangeRadioButton1.addActionListener(drinkButtonListener);
+        orangeRadioButton.addActionListener(drinkButtonListener);
         rootBeerRadioButton.addActionListener(drinkButtonListener);
         dietRootBeerRadioButton.addActionListener(drinkButtonListener);
         dietOrangeRadioButton.addActionListener(drinkButtonListener);
@@ -165,29 +203,9 @@ public class DrinksPage {
      * Updates the Item Total label
      */
     public void updateItemTotalLabel(int quantity){
-        if(sizeSelected && drinkSelected){
+        if(isSizeSelected && isDrinkSelected){
             itemTotalLabel.setText("Item Total: $" + quantity + ".00");
         }
-    }
-
-    /**
-     * Updates the cart subtotal label
-     */
-    public void updateCartSubtotalLabel(){
-        cartSubtotalLabel.setText(Main.getCartTotalString());
-    }
-
-    /**
-     * Resets the page to its original state
-     */
-    public void resetPage(){
-        drinksButtonGroup.clearSelection();
-        sizesButtonGroup.clearSelection();
-        quantityComboBox.setSelectedIndex(0);
-        itemTotalLabel.setText("Item Total: $0.00");
-        sizeSelected = false;
-        drinkSelected = false;
-        errorMessageLabel.setText("*Required");
     }
 
     /**
@@ -199,6 +217,47 @@ public class DrinksPage {
             return "1";
         }
         return String.valueOf(quantityComboBox.getSelectedItem());
+    }
+
+    /**
+     * Updates the cart subtotal label
+     */
+    public void updateCartSubtotalLabel(){
+        cartSubtotalLabel.setText(Main.getCartTotalString());
+    }
+
+    /**
+     * Creates the description of the pizza that will be added to the view cart and receipt tables
+     */
+    public void buildDescriptionString(){
+        itemDescription.append(selectedSize);
+        itemDescription.append(selectedDrink);
+    }
+
+    /**
+     * Adds the new item to the tables of the view cart page anf the receipt page
+     * @param itemDescription the description of the item that is being added
+     */
+    public void addItemsToTables(String itemDescription){
+        drinkRow[0] = "Drink";
+        drinkRow[1] = itemDescription;
+        drinkRow[2] = String.valueOf(quantityComboBox.getSelectedItem());
+        drinkRow[3] = "$" + quantityComboBox.getSelectedItem() + ".00";
+
+        Main.addTableRow(drinkRow);
+    }
+
+    /**
+     * Resets the page to its original state
+     */
+    public void resetPage(){
+        drinksButtonGroup.clearSelection();
+        sizesButtonGroup.clearSelection();
+        quantityComboBox.setSelectedIndex(0);
+        itemTotalLabel.setText("Item Total: $0.00");
+        isSizeSelected = false;
+        isDrinkSelected = false;
+        errorMessageLabel.setText("*Required");
     }
 
     /**
