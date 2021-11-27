@@ -1,15 +1,14 @@
-/**
- * The functionality and display for the Start Order page
- *
- * @author Team 2
- */
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+/**
+ * The functionality and display for the Start Order page
+ *
+ * @author Team 2
+ */
 public class StartOrderPage {
     private JPanel startOrderPanel;
     private JButton logOutButton;

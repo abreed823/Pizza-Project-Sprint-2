@@ -1,9 +1,3 @@
-/**
- * The functionality and display for the login page
- *
- * @author Team 2
- */
-
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
@@ -11,6 +5,11 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.HashMap;
 
+/**
+ * The functionality and display for the login page
+ *
+ * @author Team 2
+ */
 public class LoginPage {
     private JPanel logInPanel;
     private JFormattedTextField phoneNumberField;
@@ -18,13 +17,14 @@ public class LoginPage {
     private JButton logInButton;
     private JPasswordField passwordField;
     private JLabel errorMessageLabel;
-    private HashMap<String, String> loginInfo = new HashMap<String,String>();
+    private HashMap<String, String> loginInfo;
 
     /**
      * Constructor
      * @param loginInfoOriginal The HashMap for the login info
      */
     public LoginPage(HashMap<String, String> loginInfoOriginal) {
+        loginInfo = new HashMap<String,String>();
         loginInfo = loginInfoOriginal;
         MaskFormatter phoneNumFormat;
         try {
@@ -43,9 +43,7 @@ public class LoginPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                phoneNumberField.setText("");
-                passwordField.setText("");
-                errorMessageLabel.setText("");
+                resetPage();
                 Main.showCardLayout("welcome");
             }
         });
@@ -62,13 +60,12 @@ public class LoginPage {
 
                 if(loginInfo.containsKey(userID)){
                     if(loginInfo.get(userID).equals(password)){
-                        phoneNumberField.setText("");
-                        passwordField.setText("");
+                        resetPage();
                         Main.showCardLayout("customerWelcome");
                     }else{
                         passwordIncorrect();
                     }
-                }else if(phoneNumberField.getText().equals("") || String.valueOf(passwordField.getPassword()).equals("")){
+                }else if(phoneNumberField.getText().contains("#") || String.valueOf(passwordField.getPassword()).equals("")){
                     errorMessageLabel.setText("Please enter both your username and your password.");
                 }else{
                     passwordIncorrect();
@@ -82,6 +79,12 @@ public class LoginPage {
      */
     public void passwordIncorrect(){
         errorMessageLabel.setText("Your username and/or password is incorrect.");
+    }
+
+    public void resetPage(){
+        phoneNumberField.setText("");
+        passwordField.setText("");
+        errorMessageLabel.setText("");
     }
 
     /**

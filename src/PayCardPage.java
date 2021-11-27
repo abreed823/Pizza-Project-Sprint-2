@@ -1,15 +1,14 @@
-/**
- * The functionality and display for the Pay With Card page
- *
- * @author Team 2
- */
-
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 
+/**
+ * The functionality and display for the Pay With Card page
+ *
+ * @author Team 2
+ */
 public class PayCardPage {
     private JButton logOutButton;
     private JPanel payCardPanel;
@@ -95,8 +94,8 @@ public class PayCardPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(nameTextField.getText().equals("") || cardNumberTextField.getText().equals("") ||
-                expDateTextField.getText().equals("") || cvvTextField.getText().equals("")){
+                if(nameTextField.getText().equals("") || cardNumberTextField.getText().contains("#") ||
+                expDateTextField.getText().contains("#") || cvvTextField.getText().contains("#")){
                     errorMessageLabel.setText("*Please fill out all required fields.");
                 }else{
                     resetPage();

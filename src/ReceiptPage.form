@@ -146,7 +146,11 @@
         <children>
           <component id="63d1d" class="javax.swing.JTable" binding="receiptTable">
             <constraints/>
-            <properties/>
+            <properties>
+              <autoResizeMode value="2"/>
+              <enabled value="false"/>
+              <font size="18"/>
+            </properties>
           </component>
         </children>
       </scrollpane>

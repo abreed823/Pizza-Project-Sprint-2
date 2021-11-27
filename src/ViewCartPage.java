@@ -1,13 +1,13 @@
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  * The functionality and display for the View Cart page
  *
  * @author Team 2
  */
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ViewCartPage {
     private JButton logOutButton;
@@ -15,11 +15,13 @@ public class ViewCartPage {
     private JButton continueButton;
     private JButton backButton;
     private JTable viewCartTable;
+    private DefaultTableModel tableModel;
 
     /**
      * Constructor
      */
     public ViewCartPage() {
+        createTable();
         logOutButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -55,6 +57,24 @@ public class ViewCartPage {
         });
     }
 
+    /**
+     * Creates the JTable that shows the ordered items
+     */
+    private void createTable(){
+        tableModel = new DefaultTableModel(
+                null,
+                new String[]{"Item Type", "Item Description", "Quantity", "Price"}
+        );
+        viewCartTable.setModel(tableModel);
+    }
+
+    /**
+     * Adds new items to the table
+     * @param data the array of data to be added to the row
+     */
+    public void addTableRow(String[] data){
+        tableModel.addRow(data);
+    }
 
     /**
      * Returns the JPanel to the Main class

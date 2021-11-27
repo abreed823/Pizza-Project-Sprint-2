@@ -1,6 +1,5 @@
 //TODO -  create image icon for logo, logout buttons reset application
-// create Orders object, move instance variables in Main to constructor???, update checkout page labels,
-// fix "select quantity" label on sides page
+// move instance variables in Main to constructor???, reset cart total with logout button
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,10 +27,10 @@ public class Main {
     private SidesPage sides = new SidesPage();
     private DrinksPage drinks = new DrinksPage();
     private CheckOutPage checkOut = new CheckOutPage();
-    private ViewCartPage viewCart = new ViewCartPage();
+    private static ViewCartPage viewCart = new ViewCartPage();
     private PayCardPage payCard = new PayCardPage();
     private PayCashPage payCash = new PayCashPage();
-    private ReceiptPage receipt = new ReceiptPage();
+    private static ReceiptPage receipt = new ReceiptPage();
     private PrintPage print = new PrintPage();
     private static CartTotal cartTotal = new CartTotal();
 
@@ -141,6 +140,19 @@ public class Main {
      */
     public static void updateCartTotal(double price){
         cartTotal.updateCartTotal(price);
+    }
+
+    /**
+     * Adds items to the tables on the view cart page and receipt page
+     * @param data the array of data to be added to the row
+     */
+    public static void addTableRow(String[] data){
+        viewCart.addTableRow(data);
+        receipt.addTableRow(data);
+    }
+
+    public static void resetCartTotal(){
+        cartTotal.resetCartTotal();
     }
 
     public static void main(String[] args){

@@ -1,15 +1,15 @@
+import javax.swing.*;
+import javax.swing.text.MaskFormatter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ContainerAdapter;
+import java.text.ParseException;
+
 /**
  * The functionality and display for the Create Account page
  *
  * @author Team 2
  */
-
-import javax.swing.*;
-import javax.swing.text.MaskFormatter;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
-
 public class CreateAccountPage {
     private JFormattedTextField firstNameTextField;
     private JFormattedTextField lastNameTextField;
@@ -67,7 +67,7 @@ public class CreateAccountPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("")
-                || phoneNumberTextField.getText().equals("") || addressTextField.getText().equals("")
+                || phoneNumberTextField.getText().contains("#") || addressTextField.getText().equals("")
                 || String.valueOf(passwordField.getPassword()).equals("")
                 || String.valueOf(confirmPasswordField.getPassword()).equals("")){
                     errorMessageLabel.setText("Please fill out all text fields.");
@@ -88,6 +88,17 @@ public class CreateAccountPage {
 
                     Main.showCardLayout("customerWelcome");
                 }
+            }
+        });
+        phoneNumberTextField.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                phoneNumberTextField.setCaretPosition(0);
             }
         });
     }

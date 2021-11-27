@@ -1,7 +1,3 @@
-/**
- * The functionality and display for the Sides Selection page
- */
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +5,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
+/**
+ * The functionality and display for the Sides Selection page
+ */
 public class SidesPage {
     private JButton logOutButton;
     private JPanel sidesPanel;
@@ -20,17 +19,21 @@ public class SidesPage {
     private JLabel itemTotalLabel;
     private JLabel cartSubtotalLabel;
     private JLabel errorMessageLabel;
-    private JComboBox breadSticksComboBox;
-    private JComboBox breadBitesComboBox;
-    private JComboBox cookieComboBox;
+    private JComboBox<String> breadSticksComboBox;
+    private JComboBox<String> breadBitesComboBox;
+    private JComboBox<String> cookieComboBox;
 
     private ArrayList<JCheckBox> checkBoxes;
+    private ArrayList<JComboBox<String>> quantitiesToCheck;
 
     private double sidesPrice;
     private double breadSticksPrice;
     private double breadBitesPrice;
     private double cookiePrice;
     private String totalPrice;
+
+    private StringBuilder itemDescription;
+    private String[] sidesRow;
 
     /**
      * Constructor
@@ -45,6 +48,12 @@ public class SidesPage {
         checkBoxes.add(breadBitesCheckBox);
         checkBoxes.add(breadSticksCheckBox);
         checkBoxes.add(cookieCheckBox);
+
+        quantitiesToCheck = new ArrayList<JComboBox<String>>();
+
+        itemDescription = new StringBuilder();
+        sidesRow = new String[4];
+
 
         cancelButton.addActionListener(new ActionListener() {
             /**
@@ -69,10 +78,13 @@ public class SidesPage {
             public void actionPerformed(ActionEvent e) {
                 if(!sidesAreSelected()){
                     errorMessageLabel.setText("*Please make all required selections.");
-                }else {
+                }else if(!quantityIsSelected()){
+                    errorMessageLabel.setText("*Please select a quantity.");
+                }else{
                     Main.updateCartTotal(sidesPrice);
-                    resetPage();
                     Main.updateItemAddedLabel(true);
+                    createTableRow();
+                    resetPage();
                     Main.showCardLayout("startOrder");
                 }
             }
@@ -99,6 +111,7 @@ public class SidesPage {
             public void actionPerformed(ActionEvent e) {
                 updateSticksPrice();
                 updateSidesTotalPrice();
+                updateQuantityList(breadSticksCheckBox, breadSticksComboBox);
             }
         });
         breadBitesCheckBox.addActionListener(new ActionListener() {
@@ -111,6 +124,7 @@ public class SidesPage {
             public void actionPerformed(ActionEvent e) {
                 updateBitesPrice();
                 updateSidesTotalPrice();
+                updateQuantityList(breadBitesCheckBox, breadBitesComboBox);
             }
         });
         cookieCheckBox.addActionListener(new ActionListener() {
@@ -123,6 +137,7 @@ public class SidesPage {
             public void actionPerformed(ActionEvent e) {
                 updateCookiePrice();
                 updateSidesTotalPrice();
+                updateQuantityList(cookieCheckBox, cookieComboBox);
             }
         });
         sidesPanel.addComponentListener(new ComponentAdapter() {
@@ -145,9 +160,6 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-//                if(breadSticksCheckBox.isSelected()){
-//                    updateSidesTotalPrice();
-//                }
                 updateSticksPrice();
                 updateSidesTotalPrice();
             }
@@ -160,9 +172,6 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-//                if(breadBitesCheckBox.isSelected()) {
-//                    updateSidesTotalPrice();
-//                }
                 updateBitesPrice();
                 updateSidesTotalPrice();
             }
@@ -175,9 +184,6 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-//                if(cookieCheckBox.isSelected()){
-//                    updateSidesTotalPrice();
-//                }
                 updateCookiePrice();
                 updateSidesTotalPrice();
             }
@@ -248,6 +254,32 @@ public class SidesPage {
     }
 
     /**
+     * Updates the quantitiesToCheck ArrayList when a box is selected
+     * @param sidesBox the checkbox that is/not selected
+     * @param quantityBox the combo box to add/remove from the ArrayList
+     */
+    public void updateQuantityList(JCheckBox sidesBox, JComboBox<String> quantityBox){
+        if(sidesBox.isSelected()){
+            quantitiesToCheck.add(quantityBox);
+        }else{
+            quantitiesToCheck.remove(quantityBox);
+        }
+    }
+
+    /**
+     * Checks if the quantity combo box for each selected side item is also selected
+     * @return boolean if the combo box is selected
+     */
+    public boolean quantityIsSelected(){
+        for(JComboBox<String> quantityComboBox: quantitiesToCheck){
+            if(quantityComboBox.getSelectedIndex() == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Updates the price of the bread sticks
      */
     public void updateSticksPrice(){
@@ -281,6 +313,31 @@ public class SidesPage {
             cookiePrice = 0;
         }
         updateSidesTotalPrice();
+    }
+
+    public void createTableRow(){
+        for(JComboBox<String> item: quantitiesToCheck){
+            if(item.equals(breadSticksComboBox)){
+                addItemsToTables("Bread Sticks", String.valueOf(item.getSelectedItem()), breadBitesPrice);
+            }else if(item.equals(breadBitesComboBox)){
+                addItemsToTables("Bread Bites", String.valueOf(item.getSelectedItem()), breadSticksPrice);
+            }else if(item.equals(cookieComboBox)){
+                addItemsToTables("Chocolate Chip Cookie", String.valueOf(item.getSelectedItem()), cookiePrice);
+            }
+        }
+    }
+
+    /**
+     * Adds the new item to the tables of the view cart page anf the receipt page
+     * @param item the description of the item that is being added
+     */
+    public void addItemsToTables(String item, String quantity, double price){
+        sidesRow[0] = "Side";
+        sidesRow[1] = item;
+        sidesRow[2] = quantity;
+        sidesRow[3] = "$" + String.valueOf(price) + "0";
+
+        Main.addTableRow(sidesRow);
     }
 
     /**

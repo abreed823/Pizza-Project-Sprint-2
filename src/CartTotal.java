@@ -39,4 +39,8 @@ public class CartTotal {
         cartTotal += price;
         totalPriceString = "Cart Subtotal: $" + String.format("%.2f", cartTotal);
     }
+
+    public void resetCartTotal(){
+        cartTotal = 0;
+    }
 }

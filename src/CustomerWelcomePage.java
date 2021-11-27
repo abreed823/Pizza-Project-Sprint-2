@@ -1,13 +1,12 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  * The functionality and display for the Customer Welcome page
  *
  * @author Team 2
  */
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class CustomerWelcomePage {
     private JPanel customerWelcomePanel;
     private JButton logOutButton;
