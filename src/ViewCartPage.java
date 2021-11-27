@@ -21,6 +21,7 @@ public class ViewCartPage {
     private JLabel cartSubtotalLabel;
     private JLabel taxLabel;
     private JLabel finalTotalLabel;
+    private JLabel errorMessageLabel;
     private DefaultTableModel tableModel;
 
     private double tax;
@@ -50,6 +51,7 @@ public class ViewCartPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Main.updateItemAddedLabel(false);
+                resetPage();
                 Main.showCardLayout("startOrder");
             }
         });
@@ -61,7 +63,12 @@ public class ViewCartPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.showCardLayout("checkOut");
+                if(tax == 0){
+                    errorMessageLabel.setText("*Please order at least one item to continue.");
+                }else{
+                    resetPage();
+                    Main.showCardLayout("checkOut");
+                }
             }
         });
         viewCartPanel.addComponentListener(new ComponentAdapter() {
@@ -112,6 +119,13 @@ public class ViewCartPage {
      */
     public void addTableRow(String[] data){
         tableModel.addRow(data);
+    }
+
+    /**
+     * Resets the page to its original state
+     */
+    public void resetPage(){
+        errorMessageLabel.setText("");
     }
 
     /**

@@ -321,6 +321,9 @@ public class SidesPage {
         updateSidesTotalPrice();
     }
 
+    /**
+     * Creates the table rows that shows the ordered items
+     */
     public void createTableRow(){
         for(JComboBox<String> item: quantitiesToCheck){
             if(item.equals(breadSticksComboBox)){

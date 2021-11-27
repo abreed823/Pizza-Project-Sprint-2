@@ -12,7 +12,6 @@ import java.awt.event.ComponentEvent;
  * @author Team 2
  */
 public class ReceiptPage {
-    private JButton logOutButton;
     private JPanel receiptPanel;
     private JButton printButton;
     private JButton exitButton;
