@@ -21,6 +21,7 @@ public class CreateAccountPage {
     private JPasswordField passwordField;
     private JPasswordField confirmPasswordField;
     private JLabel errorMessageLabel;
+    private Customer customer;
 
     /**
      * Constructor
@@ -77,15 +78,13 @@ public class CreateAccountPage {
                     errorMessageLabel.setText("An account already exists for this phone number.");
 
                 }else {
-                    //Main.addLogin(phoneNumberTextField.getText(), String.valueOf(passwordField.getPassword()));
-                    firstNameTextField.setText("");
-                    lastNameTextField.setText("");
-                    phoneNumberTextField.setText("");
-                    addressTextField.setText("");
-                    passwordField.setText("");
-                    confirmPasswordField.setText("");
-                    errorMessageLabel.setText("");
-
+                    Main.addLogin(phoneNumberTextField.getText(), String.valueOf(passwordField.getPassword()));
+                    customer = new Customer(firstNameTextField.getText(), lastNameTextField.getText(),
+                            phoneNumberTextField.getText(), addressTextField.getText(), String.valueOf(passwordField.getPassword()));
+                    //Main.customerList.add(customer);
+                    Main.setCustomerHashMap(phoneNumberTextField.getText(), customer);
+                    Main.setCurrentCustomer(phoneNumberTextField.getText());
+                    resetPage();
                     Main.showCardLayout("customerWelcome");
                 }
             }
@@ -101,6 +100,16 @@ public class CreateAccountPage {
                 phoneNumberTextField.setCaretPosition(0);
             }
         });
+    }
+
+    public void resetPage(){
+        firstNameTextField.setText("");
+        lastNameTextField.setText("");
+        phoneNumberTextField.setText("");
+        addressTextField.setText("");
+        passwordField.setText("");
+        confirmPasswordField.setText("");
+        errorMessageLabel.setText("");
     }
 
     /**
