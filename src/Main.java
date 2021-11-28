@@ -3,6 +3,8 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *Sprint 2 code for SWE 3313 Pizza Project
@@ -12,6 +14,9 @@ import java.awt.*;
  * @version 1.2
  * */
 public class Main {
+    //public static ArrayList<Customer> customerList = new ArrayList<Customer>();
+    private static HashMap<String, Customer> customerHashMap = new HashMap<String, Customer>();
+    private static String currentCustomer = "";
     private JFrame frame = new JFrame("Mom and Pop's Pizza Shop");
     private static JPanel contentPanel = new JPanel();
     private static CardLayout cl = new CardLayout(20, 20);
@@ -149,6 +154,40 @@ public class Main {
     public static void addTableRow(String[] data){
         viewCart.addTableRow(data);
         receipt.addTableRow(data);
+    }
+
+    /**
+     * Adds info to the customerHashMap
+     * @param phoneNumber the phone number to be added
+     * @param customer the Customer object to be added
+     */
+    public static void setCustomerHashMap(String phoneNumber, Customer customer){
+        customerHashMap.put(phoneNumber, customer);
+    }
+
+    /**
+     * Stores the current customer that is ordering
+     * @param phoneNumber the phone number of the person who is ordering
+     */
+    public static void setCurrentCustomer(String phoneNumber){
+        currentCustomer = phoneNumber;
+    }
+
+    /**
+     * Gets the phone number associzted with the current customer
+     * @return the phone number of the current customer
+     */
+    public static String getCurrentCustomerPhone(){
+        return currentCustomer;
+    }
+
+    /**
+     * Gets the customer info for the current customer who is ordering
+     * @param phoneNumber the phone number of the current customer
+     * @return the Customer object of the current customer
+     */
+    public static Customer getCurrentCustomerObject(String phoneNumber){
+        return customerHashMap.get(phoneNumber);
     }
 
     public static void resetCartTotal(){

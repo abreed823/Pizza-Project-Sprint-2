@@ -233,6 +233,7 @@ public class DrinksPage {
         itemDescription.append(selectedSize);
         itemDescription.append(selectedDrink);
     }
+    
 
     /**
      * Adds the new item to the tables of the view cart page anf the receipt page

@@ -5,7 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 /**
  * The functionality and display for the Receipt page
  *
@@ -20,9 +24,7 @@ public class ReceiptPage {
     private JLabel taxLabel;
     private JLabel finalTotalLabel;
     private DefaultTableModel tableModel;
-
     private double tax;
-
     /**
      * Constructor
      */
@@ -65,8 +67,47 @@ public class ReceiptPage {
                 finalTotalLabel.setText("Total: $" + String.format("%.2f", Main.getCartTotalDouble() + tax));
             }
         });
-    }
+        receiptPanel.addComponentListener(new ComponentAdapter() {
+            /**
+             * Invoked when the component has been made visible.
+             *
+             * @param e
+             */
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                int orderCount = initializeCount();
+                File customerRecords = new File("src/CustomerRecords.txt");
+                try {
+                    FileWriter writer = new FileWriter(customerRecords,true);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
 
+            }
+
+
+        });
+    }
+    private int initializeCount(){
+        File count = new File("src/OrderCount.txt");
+        Scanner sc = null;
+        int temp = 0;
+        try {
+            sc = new Scanner(count);
+            temp = sc.nextInt();
+            sc.close();
+            temp++;
+            FileWriter countWriter = null;
+            countWriter = new FileWriter(count, false);
+            countWriter.write(""+temp);
+            countWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+       return temp;
+    }
     /**
      * Creates the JTable that shows the ordered items
      */

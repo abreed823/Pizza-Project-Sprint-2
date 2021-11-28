@@ -1,5 +1,10 @@
 import java.util.HashMap;
 
+//first name, last name, phone number, address, password
+//order number
+
+
+
 /**
  * Stores and adds valid combinations of user ids and passwords
  *
@@ -16,14 +21,13 @@ public class IDsandPasswords {
         loginInfo.put("770-895-2197", "April");
         loginInfo.put("770-837-8827", "Cydney");
         loginInfo.put("770-905-3185", "Carla");
-        loginInfo.remove("111-222-3333");
     }
 
     /**
      * Retrieves the login info HashMap
      * @return the login info HashMap
      */
-    public HashMap getLoginInfo(){
+    public HashMap<String, String> getLoginInfo(){
         return loginInfo;
     }
 

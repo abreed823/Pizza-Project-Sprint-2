@@ -60,6 +60,7 @@ public class LoginPage {
 
                 if(loginInfo.containsKey(userID)){
                     if(loginInfo.get(userID).equals(password)){
+                        Main.setCurrentCustomer(phoneNumberField.getText());
                         resetPage();
                         Main.showCardLayout("customerWelcome");
                     }else{
