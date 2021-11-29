@@ -71,6 +71,7 @@ public class PayCardPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                Main.resetProgram();
                 Main.showCardLayout("welcome");
             }
         });
@@ -114,6 +115,13 @@ public class PayCardPage {
         expDateTextField.setText("");
         cvvTextField.setText("");
         errorMessageLabel.setText("");
+    }
+
+    /**
+     * Completely resets application and cart when user logs out
+     */
+    public void factoryReset(){
+        resetPage();
     }
 
     /**

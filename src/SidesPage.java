@@ -100,7 +100,7 @@ public class SidesPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                resetPage();
+                Main.resetProgram();
                 Main.showCardLayout("welcome");
             }
         });
@@ -371,6 +371,14 @@ public class SidesPage {
         breadSticksComboBox.setEnabled(false);
         breadBitesComboBox.setEnabled(false);
         cookieComboBox.setEnabled(false);
+    }
+
+    /**
+     * Completely resets page and cart when user logs out
+     */
+    public void factoryReset(){
+        resetPage();
+        updateCartSubtotalLabel();
     }
 
     /**

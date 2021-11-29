@@ -24,6 +24,7 @@ public class CustomerWelcomePage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                Main.resetProgram();
                 Main.showCardLayout("startOrder");
             }
         });

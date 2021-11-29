@@ -46,6 +46,7 @@ public class CheckOutPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                Main.resetProgram();
                 Main.showCardLayout("welcome");
             }
         });
@@ -131,6 +132,13 @@ public class CheckOutPage {
         paymentMethodButtonGroup.clearSelection();
         paymentMethodSelected = false;
         errorMessageLabel.setText("");
+    }
+
+    /**
+     * Completely resets application and cart when user logs out
+     */
+    public void factoryReset(){
+        resetPage();
     }
 
     /**
