@@ -3,7 +3,6 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -28,12 +27,12 @@ public class Main {
     private CreateAccountPage createAccount = new CreateAccountPage();
     private CustomerWelcomePage customerWelcome = new CustomerWelcomePage();
     private static StartOrderPage startOrder = new StartOrderPage();
-    private PizzaPage pizza = new PizzaPage();
-    private SidesPage sides = new SidesPage();
-    private DrinksPage drinks = new DrinksPage();
-    private CheckOutPage checkOut = new CheckOutPage();
+    private static PizzaPage pizza = new PizzaPage();
+    private static SidesPage sides = new SidesPage();
+    private static DrinksPage drinks = new DrinksPage();
+    private  static CheckOutPage checkOut = new CheckOutPage();
     private static ViewCartPage viewCart = new ViewCartPage();
-    private PayCardPage payCard = new PayCardPage();
+    private static PayCardPage payCard = new PayCardPage();
     private PayCashPage payCash = new PayCashPage();
     private static ReceiptPage receipt = new ReceiptPage();
     private PrintPage print = new PrintPage();
@@ -174,7 +173,7 @@ public class Main {
     }
 
     /**
-     * Gets the phone number associzted with the current customer
+     * Gets the phone number associated with the current customer
      * @return the phone number of the current customer
      */
     public static String getCurrentCustomerPhone(){
@@ -190,10 +189,25 @@ public class Main {
         return customerHashMap.get(phoneNumber);
     }
 
-    public static void resetCartTotal(){
+    /**
+     * Completely resets application and cart when user logs out
+     */
+    public static void resetProgram(){
         cartTotal.resetCartTotal();
+        startOrder.factoryReset();
+        pizza.factoryReset();
+        drinks.factoryReset();
+        sides.factoryReset();
+        viewCart.factoryReset();
+        checkOut.factoryReset();
+        payCard.factoryReset();
+        receipt.factoryReset();
     }
 
+    /**
+     * Main method
+     * @param args arguments
+     */
     public static void main(String[] args){
         SwingUtilities.invokeLater(new Runnable() {
             @Override

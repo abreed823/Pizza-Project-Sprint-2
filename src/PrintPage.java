@@ -23,6 +23,7 @@ public class PrintPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                Main.resetProgram();
                 Main.showCardLayout("welcome");
             }
         });

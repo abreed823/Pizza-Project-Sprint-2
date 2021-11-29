@@ -38,6 +38,7 @@ public class ReceiptPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                Main.resetProgram();
                 Main.showCardLayout("welcome");
             }
         });
@@ -49,6 +50,7 @@ public class ReceiptPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                Main.resetProgram();
                 Main.showCardLayout("print");
             }
         });
@@ -139,6 +141,13 @@ public class ReceiptPage {
      */
     public void addTableRow(String[] data){
         tableModel.addRow(data);
+    }
+
+    /**
+     * Completely resets application and cart when user logs out
+     */
+    public void factoryReset(){
+        tableModel.setRowCount(0);
     }
 
     /**

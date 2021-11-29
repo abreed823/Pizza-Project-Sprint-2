@@ -25,8 +25,6 @@ public class StartOrderPage {
      */
     public StartOrderPage() {
 
-        //cartTotalLabel.setText(Main.getCartTotal());
-
         logOutButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -35,6 +33,7 @@ public class StartOrderPage {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                Main.resetProgram();
                 Main.showCardLayout("welcome");
             }
         });
@@ -124,6 +123,14 @@ public class StartOrderPage {
      */
     public void updateCartSubtotalLabel(){
         cartSubtotalLabel.setText(Main.getCartTotalString());
+    }
+
+    /**
+     * Completely resets page and cart when user logs out
+     */
+    public void factoryReset(){
+        itemAddedLabel.setText("");
+        updateCartSubtotalLabel();
     }
 
     /**

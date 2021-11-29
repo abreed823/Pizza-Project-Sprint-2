@@ -40,7 +40,11 @@ public class CartTotal {
         totalPriceString = "Cart Subtotal: $" + String.format("%.2f", cartTotal);
     }
 
+    /**
+     * Completely resets the cart when the user logs out
+     */
     public void resetCartTotal(){
         cartTotal = 0;
+        totalPriceString = "Cart Subtotal: $" + String.format("%.2f", cartTotal);
     }
 }
